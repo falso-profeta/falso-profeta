@@ -1,0 +1,15 @@
+/*
+ FONTS FAMILIES AND SIZES
+ ============================================================== */
+
+@import 'spacing';
+
+
+// Transformations and weigh
+$font-headings-weight: 600 !default;
+$text-headings-transform: none !default;
+$font-paragraph: Roboto Slab, sans;
+$font-heading: Roboto Mono, sans;
+
+// Base typographical sizes
+$font-size-default: 12pt;

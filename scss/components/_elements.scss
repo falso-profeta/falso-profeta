@@ -1,0 +1,56 @@
+@import '../settings/index';
+
+html {
+    height: 100vh;
+}
+
+body {
+    font-family: $font-paragraph;
+    font-size: 13pt;
+    box-sizing: border-box;
+    background: #3aa url("/static/bg2.png") repeat;
+}
+
+a, a:hover, a:visited {
+    color: $color-primary;
+}
+
+a, a:visited {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+    font-weight: $font-headings-weight;
+}
+h1, .h1 { font-size: 15pt };
+h2, .h2 { font-size: 13pt };
+h2, .h3 { font-size: 11pt };
+h4, .h4 { font-size: 10pt };
+
+
+main {
+    > h1, > h2, > h3, > h4, > .h1, > .h2, > .h3, > .h4 {
+        color: $color-primary;
+        margin: 10pt auto 5pt auto;
+        max-width: $desktop-width;
+    }
+
+    max-width: 100vw;
+}
+
+.Wrapper {
+    max-width: $desktop-width;
+    margin: 40pt auto;
+
+    h1, h2, h3, h4 {
+        color: $color-primary;
+        margin-top: 20pt;
+    }
+}
+
+
+.btn {
+    font-family: Roboto Slab, sans;
+    font-weight: bold;
+    text-transform: uppercase;
+}

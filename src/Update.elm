@@ -78,9 +78,9 @@ updateModel msg m =
             { m | stories = model.stories }
 
         FetchStories (Err e) ->
-            m
+            --m
+            Tuple.second ( Debug.log "Decode error" e, m )
 
-        -- Tuple.second (Debug.log "Decode error" e, m)
         SetTransition tr ->
             { m | transition = tr }
 

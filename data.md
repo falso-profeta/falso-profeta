@@ -21,16 +21,6 @@ Mestre Moa do Katendê, de 63 anos, foi assassinado com 12 facadas após se
 posicionar contra Jair Bolsonaro num bar de Salvador.
 
 
-## Mulher é agredida por eleitores de Bolsonaro em Porto Alegre (G1)
-
-    url: <https://g1.globo.com/rs/rio-grande-do-sul/noticia/2018/10/10/jovem-e-agredida-e-marcada-com-canivete-por-vestir-camiseta-com-ele-nao-em-porto-alegre.ghtml>
-    imagem: https://s2.glbimg.com/aPW-O77aS0wk5_vV5hTEWtWibHc=/0x0:996x771/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/7/v/mvj8nsRPaBkeANjtD63Q/print-post.jpg
-
-Vítima levava um adesivo na mochila, em que estava escrito 'Ele Não'. Três
-homens a atacaram e, além de socos, a marcaram uma suástica em sua barriga
-usando canivete.
-
-
 ## Cachorro é morto em carreata por eleitores de Bolsonaro (O Globo)
 
     url: https://oglobo.globo.com/brasil/irma-de-marielle-franco-diz-que-foi-agredida-verbalmente-por-apoiadores-de-bolsonaro-23141100
@@ -166,52 +156,6 @@ relata que agressões foram motivadas por desavenças políticas.
 ---
 
 
-# O erro da ditadura foi torturar e não matar (Jair Bolsonaro, em entrevista à rádio Jovem Pan)
-
-    capa: /static/jordao.jpg
-    video: https://www.youtube.com/watch?v=4z6znfxKVzk
-    outras:
-        - Se não se cuidou, o problema é dele <https://www.youtube.com/watch?v=ff80YSpuAsE>
-        - A PM devia ter matado 1.000 e não 111 presos (sobre o massacre do Carandirú) <http://acervo.folha.com.br/fsp/1997/10/03/264/>
-
-A pessoa boa tira o bem do seu depósito de coisas boas, e a pessoa má tira o mau do seu depósito de coisas más.
-- Mateus 12:35
-
-
-## Jovens intimidam grupo pró-Haddad no metrô em São Paulo aos gritos de "Ô bicharada toma cuidado, o Bolsonaro vai matar viado"
-
-    url: https://www.youtube.com/watch?v=eDlNP8bTfmE
-    imagem: https://www.revistaforum.com.br/wp-content/uploads/2018/10/palmeirenses.jpg
-
-No domingo 30, na estação Sé do Metrô, em São Paulo, um grupo de pessoas, com
-maioria de homens vestidos com uniformes do Palmeiras foram flagrados cantando:
-“Ô bicharada toma cuidado, o Bolsonaro vai matar viado”.
-
-
-## 12h depois do primeiro turno, começam a aparecer pixações de cunho racista, machista e homofóbico em instituições de ensino
-
-    url: https://jovempan.uol.com.br/eleicoes-2018/presidenciais/instituicoes-de-ensino-sao-pichadas-com-frases-preconceituosas-em-todo-brasil.html
-    imagem: https://img.jovempan.uol.com.br/uploads/2018/10/bolsonaro-2.jpg
-
-Muitas mensagens machistas, racistas, homofóbicas e preconceituosas contra
-diferentes grupos têm se espalhado pelas faculdades, universidades e escolas de
-todo o país. Em um local onde o debate e a troca de ideias deveria imperar, o
-que parece dominar é a ignorância e falta de diálogo.
-
-
-## Eleitores de Bolsonaro espancam servidora pública por criticar Bolsonaro (Folha de São Paulo)
-
-    url: https://www1.folha.uol.com.br/poder/2018/10/servidora-publica-e-espancada-em-pe-apos-criticar-bolsonaro.shtml
-    imagem: https://img.estadao.com.br/resources/jpg/8/3/1539308580038.jpg
-
-Segundo boletim de ocorrência, eleitora de Ciro Gomes e apoiadora do movimento #EleNão
-tomou socos e teve o braço quebrado após ser questionada por que não votava em
-Bolsonaro.
-
-
----
-
-
 # Eu sonego tudo que for possível (Bolsonaro, em entrevista ao programa Câmera Aberta da Band)
 
     capa: /static/rede.jpg
@@ -257,9 +201,7 @@ por funcionários de empresas telefônicas.
     capa: /static/deserto.jpg
     video: https://www.youtube.com/watch?v=-2JaiUcoUfU
     outras:
-        - merda 1 <https://www.youtube.com/watch?v=-2JaiUcoUfU>
-        - merda 2 <https://www.youtube.com/watch?v=-2JaiUcoUfU>
-
+        
 E quando o estrangeiro peregrinar convosco na vossa terra, não o oprimireis. Como um natural entre vós será o estrangeiro que peregrina convosco; amá-lo-ás como a ti mesmo, pois estrangeiros fostes na terra do Egito. Eu sou o Senhor vosso Deus.
 - Levítico 19:33-34
 
@@ -344,29 +286,12 @@ O Senhor guarda os estrangeiros; sustém o órfão e a viúva, mas transtorna o 
 - Salmos 146:9
 
 
-## Por política, criança negra é ameaçada em escola
-
-    url: http://www.diariodepernambuco.com.br/app/noticia/politica/2018/10/20/interna_politica,766006/por-politica-crianca-negra-e-ameacada-em-escola.shtml
-    imagem: http://imgsapp.diariodepernambuco.com.br/app/noticia_127983242361/2018/10/20/766006/20181020123108507954e.jpg
-
-Após a divulgação do resultado do primeiro turno, um menino disse: “Ayanna, aqui não é lugar para você. Você não vai poder estudar mais nesta escola porque não combina com sua cor. Sua família é negra e vocês têm que viver separados de nós. Bolsonaro já ganhou e garantiu que vai resolver essa mistura. Se seus pais vierem falar merda, a gente mete bala”.
-
-
 ## Apoiadores de Bolsonaro ameaçam linchar jovem negro no Guarujá (SP)
 
     url: https://ponte.org/apoiadores-de-bolsonaro-ameacam-linchar-jovem-negro-n-o-guaruja/
     imagem: https://ponte.org/wp-content/uploads/2018/10/adolescente-preso-guaruj%C3%A1.jpg
 
 Mulher negra que criticou banhistas por agredirem jovem foi ameaçada e xingada; ‘no dia 1º de janeiro isso vai acabar’, disse um deles.
-
-
-## Gays, negros e indígenas já sentem nas ruas o medo de um governo Bolsonaro
-
-    url: https://brasil.elpais.com/brasil/2018/10/18/politica/1539891924_366363.html
-    imagem: http://to-do/
-
-Episódios de intimidação aumentam ansiedade entre grupos que se sentem vulneráveis
-por discursos feitos no passado, e hoje negados, pelo candidato.
 
 
 ## Médica em Natal-RN rasga receita de paciente idoso depois de ele dizer que não votaria em Bolsonaro
@@ -405,6 +330,69 @@ Ninhada de cobras venenosas! Como é que vocês podem dizer coisas boas se são 
 - Mateus 12:34
 
 
+## Gays, negros e indígenas já sentem nas ruas o medo de um governo Bolsonaro
+
+    url: https://brasil.elpais.com/brasil/2018/10/18/politica/1539891924_366363.html
+    imagem: http://to-do/
+
+Episódios de intimidação aumentam ansiedade entre grupos que se sentem vulneráveis
+por discursos feitos no passado, e hoje negados, pelo candidato.
+
+
+## Por política, criança negra é ameaçada em escola
+
+    url: http://www.diariodepernambuco.com.br/app/noticia/politica/2018/10/20/interna_politica,766006/por-politica-crianca-negra-e-ameacada-em-escola.shtml
+    imagem: http://imgsapp.diariodepernambuco.com.br/app/noticia_127983242361/2018/10/20/766006/20181020123108507954e.jpg
+
+Após a divulgação do resultado do primeiro turno, um menino disse: “Ayanna, aqui não é lugar para você. Você não vai poder estudar mais nesta escola porque não combina com sua cor. Sua família é negra e vocês têm que viver separados de nós. Bolsonaro já ganhou e garantiu que vai resolver essa mistura. Se seus pais vierem falar merda, a gente mete bala”.
+
+
+---
+
+
+# O erro da ditadura foi torturar e não matar (Jair Bolsonaro, em entrevista à rádio Jovem Pan)
+
+    capa: /static/jordao.jpg
+    video: https://www.youtube.com/watch?v=4z6znfxKVzk
+    outras:
+        - Se não se cuidou, o problema é dele <https://www.youtube.com/watch?v=ff80YSpuAsE>
+        - A PM devia ter matado 1.000 e não 111 presos (sobre o massacre do Carandirú) <http://acervo.folha.com.br/fsp/1997/10/03/264/>
+
+A pessoa boa tira o bem do seu depósito de coisas boas, e a pessoa má tira o mau do seu depósito de coisas más.
+- Mateus 12:35
+
+
+## Jovens intimidam grupo pró-Haddad no metrô em São Paulo aos gritos de "Ô bicharada toma cuidado, o Bolsonaro vai matar viado"
+
+    url: https://www.youtube.com/watch?v=eDlNP8bTfmE
+    imagem: https://www.revistaforum.com.br/wp-content/uploads/2018/10/palmeirenses.jpg
+
+No domingo 30, na estação Sé do Metrô, em São Paulo, um grupo de pessoas, com
+maioria de homens vestidos com uniformes do Palmeiras foram flagrados cantando:
+“Ô bicharada toma cuidado, o Bolsonaro vai matar viado”.
+
+
+## 12h depois do primeiro turno, começam a aparecer pixações de cunho racista, machista e homofóbico em instituições de ensino
+
+    url: https://jovempan.uol.com.br/eleicoes-2018/presidenciais/instituicoes-de-ensino-sao-pichadas-com-frases-preconceituosas-em-todo-brasil.html
+    imagem: https://img.jovempan.uol.com.br/uploads/2018/10/bolsonaro-2.jpg
+
+Muitas mensagens machistas, racistas, homofóbicas e preconceituosas contra
+diferentes grupos têm se espalhado pelas faculdades, universidades e escolas de
+todo o país. Em um local onde o debate e a troca de ideias deveria imperar, o
+que parece dominar é a ignorância e falta de diálogo.
+
+
+## Eleitores de Bolsonaro espancam servidora pública por criticar Bolsonaro (Folha de São Paulo)
+
+    url: https://www1.folha.uol.com.br/poder/2018/10/servidora-publica-e-espancada-em-pe-apos-criticar-bolsonaro.shtml
+    imagem: https://img.estadao.com.br/resources/jpg/8/3/1539308580038.jpg
+
+Segundo boletim de ocorrência, eleitora de Ciro Gomes e apoiadora do movimento #EleNão
+tomou socos e teve o braço quebrado após ser questionada por que não votava em
+Bolsonaro.
+
+
 ---
 
 
@@ -413,10 +401,20 @@ Ninhada de cobras venenosas! Como é que vocês podem dizer coisas boas se são 
     capa: /static/mao.jpg
     video: https://www.youtube.com/watch?time_continue=19&v=dvaYrw1hkjg
     outras:
-        - Bolsonaro emprega servidora fantasma que vendia açaí em Angra durante o expediente <https://www1.folha.uol.com.br/poder/2018/08/assessora-fantasma-de-bolsonaro-continua-vendendo-acai-em-horario-de-expediente.shtml>
-        - Filho de Bolsonaro aumenta patrimônio em 432% em 4 anos<https://noticias.uol.com.br/politica/eleicoes/2018/noticias/2018/08/20/filho-de-bolsonaro-aumenta-patrimonio-em-432-em-4-anos.htm?cmpid=copiaecola>
-
-
+        
 Serpentes, raça de víboras! Como escapareis da condenação do inferno?
 -Mateus 23:33
 
+
+## Bolsonaro emprega servidora fantasma que vendia açaí em Angra durante o expediente
+    url: https://www1.folha.uol.com.br/poder/2018/08/assessora-fantasma-de-bolsonaro-continua-vendendo-acai-em-horario-de-expediente.shtml
+    imagem: https://static.congressoemfoco.uol.com.br/2017/12/Jair-Bolsonaro.jpg
+    
+Bolsonaro empregava funcionária que vendia açaí em Angra dos Reis durante o expediente, apesar de lotada no gabinete do parlamentar em Brasília. A funcionária se demitiu após reportagem da Folha, meses após a primeira denúncia publicada pelo jornal.
+    
+
+## Filho de Bolsonaro aumenta patrimônio em 432% em 4 anos 
+    url: https://noticias.uol.com.br/politica/eleicoes/2018/noticias/2018/08/20/filho-de-bolsonaro-aumenta-patrimonio-em-432-em-4-anos.htm?cmpid=copiaecola
+    imagem: https://conteudo.imguol.com.br/c/noticias/ae/2018/08/20/7mar2018---flavio-bolsonaro-na-frente-e-eduardo-bolsonaro-durante-cerimonia-de-filiacao-de-jair-bolsonaro-ao-psl-em-brasilia-1534777664559_615x300.jpg
+    
+Bolsonaro e os dois filhos políticos (Flávio e Eduardo, eleitos senador e deputado federal, repectivamente) tiveram uma evolução patrimonial elevada nos últimos anos, de acordo com a declaração de bens apresentada ao TSE. Jair Bolsonaro ampliou os bens em 168% desde 2006; Eduardo, 432% desde 2014, e Flávio, 55% desde 2010. Os integrantes da família ampliaram o patrimônio basicamente com a aquisição de imóveis: casas e apartamentos.

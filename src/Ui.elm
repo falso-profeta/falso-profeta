@@ -22,21 +22,35 @@ import Update exposing (Msg(..))
 --- LAYOUT ELEMENTS ------------------------------------------------------------
 
 
-appLayout : Url -> Quote -> Html Msg -> Html Msg
-appLayout url (Quote quote from) child =
+appLayout : Url -> Bool -> Quote -> Html Msg -> Html Msg
+appLayout url linkInit (Quote quote from) child =
+    let
+        quoteDiv =
+            div [ class "Quote" ]
+                [ blockquote (attrsFromQuote quote) [ span [] [ text quote ] ]
+                , Html.cite [] [ text from ]
+                ]
+
+        contentDiv =
+            div [ class "MainContent" ] [ child ]
+
+        children =
+            if linkInit then
+                [ quoteDiv
+                , contentDiv
+                , div [ class "InitLink" ]
+                    [ a
+                        [ onClick Restart, href "#" ]
+                        [ i [class "fas fa-chevron-left"] [], text " início" ]
+                    ]
+                ]
+
+            else
+                [ quoteDiv, contentDiv ]
+    in
     div
         [ class "App", style "background-image" (asUrl url) ]
-        [ -- div [ class "Nav" ]
-          -- [ i [ onClick Prev, class "fas fa-arrow-left" ] []
-          -- , i [ onClick Next, class "fas fa-arrow-right" ] []
-          -- ]
-          -- ,
-          div [ class "Quote" ]
-            [ blockquote (attrsFromQuote quote) [ span [] [ text quote ] ]
-            , Html.cite [] [ text from ]
-            ]
-        , div [ class "MainContent" ] [ child ]
-        ]
+        children
 
 
 asUrl st =
@@ -79,6 +93,7 @@ youtubeIframe cls url =
     iframe
         [ width 500
         , height 375
+        , attribute "max-width" "100%"
         , class cls
         , src url
         , property "frameborder" (Json.Encode.string "0")

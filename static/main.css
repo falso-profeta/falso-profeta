@@ -60,9 +60,12 @@ html {
 
 body {
   font-family: Roboto Slab, sans;
-  font-size: 13pt;
+  font-size: 11pt;
   box-sizing: border-box;
   background: #3aa url("/static/bg2.png") repeat; }
+  @media only screen and (min-width: 500px) {
+    body {
+      font-size: 13pt; } }
 
 a, a:hover, a:visited {
   color: #5125aa; }
@@ -74,35 +77,16 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   font-weight: 600; }
 
 h1, .h1 {
-  font-size: 15pt; }
+  font-size: 1.15em; }
 
 h2, .h2 {
-  font-size: 13pt; }
+  font-size: 1em; }
 
 h2, .h3 {
-  font-size: 11pt; }
+  font-size: 0.9em; }
 
 h4, .h4 {
-  font-size: 10pt; }
-
-main {
-  max-width: 100vw; }
-  main > h1, main > h2, main > h3, main > h4, main > .h1, main > .h2, main > .h3, main > .h4 {
-    color: #5125aa;
-    margin: 10pt auto 5pt auto;
-    max-width: 900px; }
-
-.Wrapper {
-  max-width: 900px;
-  margin: 40pt auto; }
-  .Wrapper h1, .Wrapper h2, .Wrapper h3, .Wrapper h4 {
-    color: #5125aa;
-    margin-top: 20pt; }
-
-.btn {
-  font-family: Roboto Slab, sans;
-  font-weight: bold;
-  text-transform: uppercase; }
+  font-size: 0.85em; }
 
 /*
  COLORS ROLES
@@ -202,12 +186,19 @@ main {
 .App {
   background: #eaeaea center;
   background-size: cover;
-  height: calc(100vh - 20pt);
   box-sizing: border-box;
-  max-width: 500px;
-  margin: 10pt auto;
-  border: 3px solid black;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24); }
+  height: 100vh;
+  margin: 0;
+  position: absolute;
+  top: 0; }
+  @media only screen and (min-width: 500px) {
+    .App {
+      position: initial;
+      height: calc(100vh - 20pt);
+      max-width: 500px;
+      margin: 10pt auto;
+      border: 3px solid black;
+      box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24); } }
 
 .Nav {
   font-size: 1.5em;
@@ -230,16 +221,20 @@ main {
   font-weight: 600;
   margin-top: 40pt; }
   .Quote blockquote {
-    font-size: 16pt;
+    font-size: 13pt;
     text-align: left;
     line-height: 2.2;
     margin-top: 0; }
+    @media only screen and (min-width: 500px) {
+      .Quote blockquote {
+        font-size: 16pt; } }
     .Quote blockquote span {
       background: #ffe03d;
       border-bottom: 3px solid #5125aa;
       padding: -0.1em;
       animation: FadeIn 1s ease-out 0s both; }
-    .Quote blockquote span:before, .Quote blockquote span:after {
+    .Quote blockquote span:before,
+    .Quote blockquote span:after {
       position: relative;
       font-size: 2em;
       color: #5125aa;
@@ -264,7 +259,7 @@ main {
 
 .ContentBox {
   animation: FadeIn 1s ease 0s both;
-  transition: transform 0.5s, background-color 0.5s;
+  transition: transform 0.5s, background-color 0.5s, width 0.5s, left 0.5s;
   background-color: rgba(255, 255, 255, 0.75);
   color: black;
   text-align: center;
@@ -274,7 +269,6 @@ main {
   position: absolute;
   left: 12.5%;
   width: 70%;
-  horiz-align: center;
   max-width: 350px;
   max-height: calc(100vh - 40pt); }
   .ContentBox .Rants {
@@ -288,11 +282,11 @@ main {
       margin: 0 5pt; }
   .ContentBox cite {
     display: block;
-    font-size: 10pt;
+    font-size: 0.9em;
     text-align: right;
     margin: 10pt 0 20pt 0; }
   .ContentBox q {
-    font-size: 14pt;
+    font-size: 1.1em;
     font-weight: 600; }
 
 .ContentBox.delay {
@@ -303,9 +297,15 @@ main {
   transform: translateY(-45vh);
   margin: 0 auto;
   height: calc(90vh - 40pt);
-  overflow-y: auto; }
+  overflow-y: auto;
+  width: 90%;
+  left: 1%; }
   .ContentBox--rants .Rants {
     display: block; }
+  @media only screen and (min-width: 500px) {
+    .ContentBox--rants {
+      width: 70%;
+      left: 12.5%; } }
 
 .Rants {
   animation: Reveal 250ms ease 100ms both;
@@ -352,9 +352,9 @@ main {
   text-align: left;
   position: relative;
   transform: translateY(-45vh);
-  left: 5.5%;
-  width: 80%;
-  max-width: 400px;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
   height: calc(90vh - 40pt);
   overflow-y: auto;
   overflow-x: hidden;
@@ -363,6 +363,10 @@ main {
   border-bottom: 3px solid #5125aa;
   margin: auto 0;
   box-shadow: 0 3px 3.5px 0 rgba(0, 0, 0, 0.12), 0 3px 3px 1px rgba(0, 0, 0, 0.24); }
+  @media only screen and (min-width: 500px) {
+    .ShowEvents {
+      left: 5%;
+      width: 90%; } }
   .ShowEvents .Event {
     animation: Reveal 0.5s ease 0s both; }
   .ShowEvents img {
@@ -389,5 +393,12 @@ main {
   .ShowEvents .back {
     margin: 10pt;
     text-align: center; }
+
+.InitLink {
+  position: absolute;
+  top: calc(100vh - 55pt);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 3pt; }
 
 /*# sourceMappingURL=main.css.map */

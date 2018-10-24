@@ -1,9 +1,7 @@
 @import '../settings/index';
-
 $max-width: 500px;
 $quotation-background-color: rgba(255, 224, 61, 1);
 $border-color: $color-primary;
-
 //
 // ANIMATIONS
 //
@@ -104,36 +102,35 @@ $border-color: $color-primary;
 .App {
     background: rgb(234, 234, 234) center;
     background-size: cover;
-
-    height: calc(100vh - 20pt);
     box-sizing: border-box;
-    max-width: $max-width;
-    margin: 10pt auto;
-
-    border: 3px solid black;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
+    height: 100vh;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    @media only screen and (min-width: $max-width) {
+        position: initial;
+        height: calc(100vh - 20pt);
+        max-width: $max-width;
+        margin: 10pt auto;
+        border: 3px solid black;
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
+    }
 }
-
-
 
 .Nav {
     font-size: 1.5em;
-
     box-sizing: border-box;
     padding: 10pt 20pt;
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     z-index: 10;
-
     i.fas {
         padding: 6pt;
         background: rgba(white, 0.3);
         border-radius: 50%;
     }
 }
-
 
 .Quote {
     color: black;
@@ -142,19 +139,22 @@ $border-color: $color-primary;
     text-transform: uppercase;
     font-weight: 600;
     margin-top: 40pt;
-
     blockquote {
-        font-size: 16pt;
+        font-size: 13pt;
         text-align: left;
         line-height: 2.2;
         margin-top: 0;
+        @media only screen and (min-width: $max-width) {
+            font-size: 16pt;
+        }
         span {
             background: $quotation-background-color;
             border-bottom: 3px solid $border-color;
             padding: -0.1em;
             animation: FadeIn 1s ease-out 0s both;
         }
-        span:before, span:after {
+        span:before,
+        span:after {
             position: relative;
             font-size: 2em;
             color: $color-primary;
@@ -186,22 +186,18 @@ $border-color: $color-primary;
 
 .ContentBox {
     animation: FadeIn 1s ease 0s both;
-    transition: transform 0.5s, background-color 0.5s;
-
+    transition: transform 0.5s, background-color 0.5s, width 0.5s, left 0.5s;
     background-color: rgba(white, 0.75);
     color: black;
     text-align: center;
-
     border-top: 3px solid $color-primary;
     margin: 0 auto;
     padding: 10pt;
     position: absolute;
     left: 12.5%;
     width: 70%;
-    horiz-align: center;
     max-width: 0.7 * $max-width;
     max-height: calc(100vh - 40pt);
-
     .Rants {
         display: none;
     }
@@ -210,19 +206,18 @@ $border-color: $color-primary;
         position: relative;
         top: 20px;
         margin: -10px auto;
-
         .FabButton {
             margin: 0 5pt;
         }
     }
     cite {
         display: block;
-        font-size: 10pt;
+        font-size: 0.9em;
         text-align: right;
         margin: 10pt 0 20pt 0;
     }
     q {
-        font-size: 14pt;
+        font-size: 1.1em;
         font-weight: 600;
     }
 }
@@ -233,24 +228,27 @@ $border-color: $color-primary;
 
 .ContentBox--rants {
     background-color: rgba(white, 0.97);
-
     transform: translateY(-45vh);
     margin: 0 auto;
     height: calc(90vh - 40pt);
     overflow-y: auto;
+    width: 90%;
+    left: 1%;
 
     .Rants {
         display: block;
+    }
+    @media only screen and (min-width: $max-width) {
+        width: 70%;
+        left: 12.5%;
     }
 }
 
 .Rants {
     animation: Reveal 250ms ease 100ms both;
-
     margin-top: 10px;
     border-top: 2px solid #6663;
     padding: 20pt;
-
     &-nav {
         border-top: 2px solid #6663;
         padding-top: 10pt;
@@ -260,7 +258,6 @@ $border-color: $color-primary;
 .Video {
     animation: none;
     position: fixed;
-
     &-overlay {
         width: 100%;
         height: calc(100vh + 10pt);
@@ -270,7 +267,6 @@ $border-color: $color-primary;
         left: 0 !important;
         z-index: 3;
     }
-
     &-content {
         animation: FadeIn 0.5s ease-out 0s both;
         top: 15vh;
@@ -279,12 +275,11 @@ $border-color: $color-primary;
         position: fixed;
         text-align: center;
         z-index: 4;
-
         iframe {
             border: 3px solid $color-primary;
             background: black;
         }
-        > div {
+        >div {
             .FabButton {
                 margin: 0 5pt;
                 display: inline;
@@ -302,21 +297,24 @@ $border-color: $color-primary;
     background: rgba(white, 0.95);
     font-size: 12pt;
     text-align: left;
-
     position: relative;
     transform: translateY(-45vh);
-    left: 5.5%;
-    width: 80%;
-    max-width: 0.80 * $max-width;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
     height: calc(90vh - 40pt);
     overflow-y: auto;
     overflow-x: hidden;
-
     padding: 15pt;
     border-top: 3px solid $color-primary;
     border-bottom: 3px solid $color-primary;
     margin: auto 0;
     box-shadow: 0 3px 3.5px 0 rgba(0, 0, 0, .12), 0 3px 3px 1px rgba(0, 0, 0, .24);
+
+    @media only screen and (min-width: $max-width) {
+        left: 5%;
+        width: 90%;
+    }
 
     .Event {
         animation: Reveal 0.5s ease 0s both;
@@ -331,7 +329,7 @@ $border-color: $color-primary;
     h1 {
         display: flex;
         justify-content: space-between;
-        > * {
+        >* {
             display: block;
         }
     }
@@ -351,4 +349,12 @@ $border-color: $color-primary;
         margin: 10pt;
         text-align: center;
     }
+}
+
+.InitLink {
+    position: absolute;
+    top: calc(100vh - 55pt);
+    margin: 0 auto;
+    background: rgba(white, 0.5);
+    padding: 3pt;
 }

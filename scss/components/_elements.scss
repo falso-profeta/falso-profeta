@@ -1,4 +1,5 @@
 @import '../settings/index';
+$max-width: 500px;
 
 html {
     height: 100vh;
@@ -7,9 +8,13 @@ html {
 
 body {
     font-family: $font-paragraph;
-    font-size: 13pt;
+    font-size: 11pt;
     box-sizing: border-box;
     background: #3aa url("/static/bg2.png") repeat;
+    
+    @media only screen and (min-width: $max-width) {
+        font-size: 13pt;
+    }
 }
 
 a, a:hover, a:visited {
@@ -23,35 +28,7 @@ a, a:visited {
 h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
     font-weight: $font-headings-weight;
 }
-h1, .h1 { font-size: 15pt };
-h2, .h2 { font-size: 13pt };
-h2, .h3 { font-size: 11pt };
-h4, .h4 { font-size: 10pt };
-
-
-main {
-    > h1, > h2, > h3, > h4, > .h1, > .h2, > .h3, > .h4 {
-        color: $color-primary;
-        margin: 10pt auto 5pt auto;
-        max-width: $desktop-width;
-    }
-
-    max-width: 100vw;
-}
-
-.Wrapper {
-    max-width: $desktop-width;
-    margin: 40pt auto;
-
-    h1, h2, h3, h4 {
-        color: $color-primary;
-        margin-top: 20pt;
-    }
-}
-
-
-.btn {
-    font-family: Roboto Slab, sans;
-    font-weight: bold;
-    text-transform: uppercase;
-}
+h1, .h1 { font-size: 1.15em; };
+h2, .h2 { font-size: 1em; };
+h2, .h3 { font-size: 0.9em; };
+h4, .h4 { font-size: 0.85em; };

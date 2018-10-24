@@ -11,10 +11,10 @@ import Model
         , mapStory
         , readStory
         )
+import Process
 import Tape exposing (..)
 import Task
 import Time
-import Process
 
 
 type Msg
@@ -24,6 +24,7 @@ type Msg
     | ToggleRants
     | ToggleVideo
     | ToggleEvents
+    | Restart
     | FetchStories (Result Http.Error Model)
     | SetTransition PageTransition
 
@@ -78,10 +79,13 @@ updateModel msg m =
 
         FetchStories (Err e) ->
             m
-            -- Tuple.second (Debug.log "Decode error" e, m)
 
+        -- Tuple.second (Debug.log "Decode error" e, m)
         SetTransition tr ->
             { m | transition = tr }
+
+        Restart ->
+            { m | state = IntroPage }
 
         NoOp ->
             m

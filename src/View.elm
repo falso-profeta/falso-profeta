@@ -1,14 +1,10 @@
 module View exposing (view)
 
-import Bootstrap.Button as Btn
-import Bootstrap.CDN as CDN
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Lazy exposing (lazy)
-import Markdown
 import Model exposing (..)
-import Style exposing (..)
 import Ui
 import Update exposing (Msg(..))
 
@@ -26,18 +22,28 @@ view m =
 
                 FinishPage ->
                     viewFinishPage
+
+        revealClass =
+            case m.transition of
+                FromLeft ->
+                    "FromLeft"
+
+                FromRight ->
+                    "FromRight"
+
+                Neutral ->
+                    "Reveal"
+
+                ClearTransition ->
+                    "ResetAnimation"
     in
-    div []
-        (Ui.styleElements
-            ++ [ Ui.appWrapper [ content ]
-               ]
-        )
+    div [ class revealClass ]
+        (Ui.styleElements ++ [ content ])
 
 
 viewIntroPage : Html Msg
 viewIntroPage =
-    Ui.quoteLayout
-        "intro"
+    Ui.appLayout
         "/static/cruz.jpg"
         (Quote
             """
@@ -46,29 +52,32 @@ viewIntroPage =
             """
             "Mateus 24:11-12"
         )
-        (div [ class "ShowMore delay" ]
+        (div [ class "ContentBox delay" ]
             [ h1 []
-                [ text "A política do Brasil está cheia de falsos profetas." ]
+                [ text "A política brasileira está cheia de falsos profetas." ]
             , p []
-                [ text
-                    "O deputado Jair Messias Bolsonaro é um deles."
+                [ text "Eles se dizem cristãos, mas na verdade propagam a intolerância. O deputado "
+                , strong [] [ text "Jair Messias Bolsonaro" ]
+                , text " é um deles."
                 ]
             , a
                 [ href "#", onClick Next ]
                 [ text "saiba mais" ]
-            , Ui.fab Next "fas fa-chevron-right"
+            , div [class "ContentBox-controls"] [Ui.fab Next "fas fa-chevron-right"]
             ]
         )
 
 
 viewStory : Story -> Html Msg
 viewStory st =
-    Ui.quoteLayout
-        (storyId st)
+    Ui.appLayout
         st.image
         (Quote st.bible st.ref)
         (if st.state == ShowEvents then
             viewEvents st
+
+         else if st.state == ShowVideo then
+            showVideoOverlay st
 
          else
             viewShowMore st
@@ -81,22 +90,25 @@ viewShowMore st =
         showMoreClass =
             case st.state of
                 ShowRants ->
-                    class "ShowMore rants"
+                    class "ContentBox ContentBox--rants"
 
                 _ ->
-                    class "ShowMore"
+                    class "ContentBox"
     in
     div [ showMoreClass ]
         [ p [ style "color" "#000b" ] [ text "o que diz Jair..." ]
         , div [] [ q [] [ text st.utter ] ]
         , Html.cite [ style "color" "#000b" ]
-            [ text "- Jair Messias Bolsonaro, Deputado Federal"
+            [ text ("- " ++ st.context)
             ]
         , div []
             [ Ui.icon "fab fa-youtube"
             , text " "
             , a [ href "#", onClick ToggleVideo ]
                 [ text "veja o vídeo" ]
+            ]
+        , div [ class "ContentBox-controls" ]
+            [ Ui.fab Prev "fas fa-chevron-left"
             , Ui.fab ToggleRants
                 (if st.state == ShowRants then
                     "fas fa-minus"
@@ -104,6 +116,7 @@ viewShowMore st =
                  else
                     "fas fa-plus"
                 )
+            , Ui.fab Next "fas fa-chevron-right"
             ]
         , div [ class "Rants" ]
             (List.map viewRant st.rants
@@ -114,13 +127,12 @@ viewShowMore st =
                             ]
                         , text " | "
                         , a [ onClick ToggleEvents, href "#" ]
-                            [ text "seus seguidores "
+                            [ text "consequências "
                             , i [ class "fas fa-chevron-right" ] []
                             ]
                         ]
                    ]
             )
-        , showVideoOverlay st
         ]
 
 
@@ -210,25 +222,30 @@ viewSource { name, url } =
 
 viewFinishPage : Html Msg
 viewFinishPage =
-    Ui.quoteLayout
-        "finish"
+    Ui.appLayout
         "/static/facepalm.jpg"
         (Quote
-            """
-         Se vocês fossem cegos, não teriam culpa! Mas como dizem que podem ver, 
-         então continuam tendo culpa.         """
-            "João 9:41"
+            "E conhecereis a verdade, e a verdade vos libertará."
+            "João 8:32"
         )
-        (div [ class "ShowMore" ]
+        (div [ class "ContentBox" ]
             [ h1 [] [ text "Sobre nós" ]
-            , p [] [ text "balsoaos " ]
+            , p []
+                [ text
+                    """
+            Expomos falas e comportamentos de Jair Bolsonaro em sua
+            tragetória política e vida pública usando vídeos e textos da 
+            imprensa nacional (sempre linkados), confrontando-os com passagens 
+            da Bíblia. 
+            """
+                ]
+            , p []
+                [ text "Tire suas próprias conclusões: Bolsonaro pauta sua vida por valores "
+                , strong [] [ text "democráticos e cristãos?" ]
+                ]
+            , div [class "ContentBox-controls"] [Ui.fab Next "fas fa-redo"]
             ]
         )
-
-
-storyId : Story -> String
-storyId st =
-    "story-" ++ (last (String.split "/" st.youtube) |> Maybe.withDefault "youtube")
 
 
 last : List a -> Maybe a
@@ -242,25 +259,3 @@ last lst =
 
         x :: tail ->
             last tail
-
-
-
---- MARKDOWN CONTENT -----------------------------------------------------------
-
-
-md : List (Html.Attribute msg) -> String -> Html msg
-md attrs src =
-    Markdown.toHtml attrs src
-
-
-
--- |> Html.Styled.fromUnstyled
-
-
-introContent : Html msg
-introContent =
-    md [] """
-# Bolsonaro é fiel
-
-Bolsonaro é um péssimo deputado e pessoa.
-"""

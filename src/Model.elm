@@ -2,6 +2,7 @@ module Model exposing
     ( AppState(..)
     , Event
     , Model
+    , PageTransition(..)
     , Quote(..)
     , Rant
     , Source
@@ -43,22 +44,33 @@ type StoryState
     | ShowEvents
 
 
+type PageTransition
+    = FromLeft
+    | FromRight
+    | Neutral
+    | ClearTransition
+
+
 type alias Model =
     { stories : Tape Story
     , state : AppState
+    , transition : PageTransition
     }
 
 
 modelDecoder : D.Decoder Model
 modelDecoder =
+    let
+        toModel sts =
+            D.succeed
+                { init
+                    | stories =
+                        Tape.rewind
+                            (Tape.fromList defaultStory sts)
+                }
+    in
     D.list storyDecoder
-        |> D.andThen
-            (\sts ->
-                D.succeed
-                    { stories = Tape.rewind <| Tape.fromList defaultStory (sts ++ sts)
-                    , state = IntroPage
-                    }
-            )
+        |> D.andThen toModel
 
 
 type alias Story =
@@ -66,6 +78,7 @@ type alias Story =
     , bible : String
     , ref : String
     , utter : String
+    , context: String
     , youtube : Url
     , image : Url
     , events : List Event
@@ -75,10 +88,11 @@ type alias Story =
 
 storyDecoder : D.Decoder Story
 storyDecoder =
-    D.map7 (Story ShowCover)
+    D.map8 (Story ShowCover)
         (D.field "bible" D.string)
         (D.field "ref" D.string)
         (D.field "utter" D.string)
+        (D.field "context" D.string)
         (D.field "youtube" D.string)
         (D.field "image" D.string)
         (D.field "events" (D.list eventDecoder))
@@ -143,7 +157,7 @@ mapStory f m =
 
 init : Model
 init =
-    Model (Tape.single defaultStory) IntroPage
+    Model (Tape.single defaultStory) IntroPage Neutral
 
 
 defaultStory : Story
@@ -151,6 +165,7 @@ defaultStory =
     { bible = "<default>"
     , ref = "<default>"
     , utter = "<default>"
+    , context = "Bolsonaro, Deputado Federal"
     , youtube = ""
     , image = ""
     , events = []

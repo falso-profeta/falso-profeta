@@ -1,7 +1,12 @@
 @import '../settings/index';
 
 $max-width: 500px;
+$quotation-background-color: rgba(255, 224, 61, 1);
+$border-color: $color-primary;
 
+//
+// ANIMATIONS
+//
 @keyframes FadeIn {
     0% {
         opacity: 0;
@@ -10,7 +15,6 @@ $max-width: 500px;
         opacity: 1;
     }
 }
-
 
 @keyframes Reveal {
     0% {
@@ -23,13 +27,51 @@ $max-width: 500px;
     }
 }
 
+@keyframes FromLeft {
+    0% {
+        opacity: 0.5;
+        transform: translateX(-5%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
+@keyframes FromRight {
+    0% {
+        opacity: 0.5;
+        transform: translateX(5%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-// FAB BUTTON ---------------------------------------------------------
-.Fab {
+.FromLeft {
+    animation: FromLeft 300ms ease 0ms both;
+}
+
+.FromRight {
+    animation: FromRight 300ms ease 0ms both;
+}
+
+.Reveal {
+    animation: Reveal 300ms linear 0ms both;
+}
+
+.ResetAnimation {
+    animation: None;
+}
+
+//
+// ATOMIC ELEMENTS
+//
+.FabButton {
     background: 0 0;
-    background: rgba(158, 158, 158, .2);
     background: $color-primary;
+    cursor: pointer;
     border: none;
     color: #fff;
     border-radius: 50%;
@@ -43,7 +85,6 @@ $max-width: 500px;
     box-shadow: 0 2px 2.5px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
     position: relative;
     line-height: normal;
-    //border: none;
     display: inline-block;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 500;
@@ -52,65 +93,61 @@ $max-width: 500px;
     will-change: box-shadow;
     transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
     outline: none;
-    cursor: pointer;
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
 }
 
-// APP WRAPPER ---------------------------------------------------------
-.AppWrapper {
-    max-width: $max-width;
-    margin: 0 auto;
-    background: rgb(234, 234, 234);
+//
+// COMPONENTS
+//
+.App {
+    background: rgb(234, 234, 234) center;
     background-size: cover;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
-    height: 100vh;
+
+    height: calc(100vh - 20pt);
+    box-sizing: border-box;
+    max-width: $max-width;
+    margin: 10pt auto;
+
     border: 3px solid black;
-    border-top: none;
-    border-bottom: none;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
 }
+
+
+
+.Nav {
+    font-size: 1.5em;
+
+    box-sizing: border-box;
+    padding: 10pt 20pt;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+
+    i.fas {
+        padding: 6pt;
+        background: rgba(white, 0.3);
+        border-radius: 50%;
+    }
+}
+
 
 .Quote {
-    height: 100vh;
-
-    &-background {
-        background-size: cover;
-        background-position: center;
-        object-position: center;
-        filter: saturate(0%);
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        max-width: $max-width;
-        z-index: 0;
-    }
-
-    &-overlay {
-        background: transparent;
-        position: relative;
-        z-index: 1;
-    }
-}
-
-$quotation-background-color: rgba(0, 0, 0, 0.6);
-$quotation-background-color: rgba(255, 224, 61, 1);
-$border-color: $color-primary;
-
-.Quotation {
     color: black;
-    padding-top: 50pt;
     text-align: right;
     font-family: $font-heading;
     text-transform: uppercase;
     font-weight: 600;
+    margin-top: 40pt;
 
     blockquote {
         font-size: 16pt;
         text-align: left;
         line-height: 2.2;
-
+        margin-top: 0;
         span {
             background: $quotation-background-color;
             border-bottom: 3px solid $border-color;
@@ -131,7 +168,6 @@ $border-color: $color-primary;
             content: close-quote;
         }
     }
-
     cite {
         background: $quotation-background-color;
         border-bottom: 2px solid $border-color;
@@ -140,51 +176,68 @@ $border-color: $color-primary;
     }
 }
 
-.ShowMore {
+.MainContent {
+    width: 100%;
+    max-width: $max-width;
+    position: absolute;
+    bottom: 0;
+    height: calc(50vh - 10pt);
+}
+
+.ContentBox {
     animation: FadeIn 1s ease 0s both;
-    color: black;
-    background-color: rgba(white, 0.5);
-    padding: 10pt;
-    text-align: center;
-    width: 70%;
-    border-top: 3px solid $color-primary;
-    margin: 50pt auto 0;
-    position: relative;
     transition: transform 0.5s, background-color 0.5s;
+
+    background-color: rgba(white, 0.75);
+    color: black;
+    text-align: center;
+
+    border-top: 3px solid $color-primary;
+    margin: 0 auto;
+    padding: 10pt;
+    position: absolute;
+    left: 12.5%;
+    width: 70%;
+    horiz-align: center;
+    max-width: 0.7 * $max-width;
+    max-height: calc(100vh - 40pt);
 
     .Rants {
         display: none;
     }
-
-    .Fab {
+    &-controls {
         display: block;
         position: relative;
         top: 20px;
         margin: -10px auto;
-    }
 
+        .FabButton {
+            margin: 0 5pt;
+        }
+    }
     cite {
         display: block;
         font-size: 10pt;
         text-align: right;
         margin: 10pt 0 20pt 0;
     }
-
     q {
         font-size: 14pt;
         font-weight: 600;
     }
 }
 
-.ShowMore.delay {
+.ContentBox.delay {
     animation-delay: 1s;
 }
 
-.ShowMore.rants {
-    horiz-align: center;
-    transform: translateY(-150pt);
-    margin: 0 auto;
+.ContentBox--rants {
     background-color: rgba(white, 0.97);
+
+    transform: translateY(-45vh);
+    margin: 0 auto;
+    height: calc(90vh - 40pt);
+    overflow-y: auto;
 
     .Rants {
         display: block;
@@ -192,10 +245,11 @@ $border-color: $color-primary;
 }
 
 .Rants {
+    animation: Reveal 250ms ease 100ms both;
+
     margin-top: 10px;
     border-top: 2px solid #6663;
     padding: 20pt;
-    animation: Reveal 250ms ease 100ms both;
 
     &-nav {
         border-top: 2px solid #6663;
@@ -204,34 +258,34 @@ $border-color: $color-primary;
 }
 
 .Video {
+    animation: none;
     position: fixed;
-    animation: FadeIn 0.5s ease-out 0s both;
 
     &-overlay {
         width: 100%;
-        height: 100vh;
+        height: calc(100vh + 10pt);
         background: rgba(black, 0.7);
-        filter: blur(10%);
         position: fixed;
-        top: 0 !important;
+        top: -10pt !important;
         left: 0 !important;
         z-index: 3;
     }
 
     &-content {
-        position: fixed;
+        animation: FadeIn 0.5s ease-out 0s both;
         top: 15vh;
         left: 0;
         width: 100%;
+        position: fixed;
+        text-align: center;
         z-index: 4;
 
         iframe {
             border: 3px solid $color-primary;
             background: black;
         }
-
         > div {
-            .Fab {
+            .FabButton {
                 margin: 0 5pt;
                 display: inline;
             }
@@ -243,48 +297,30 @@ $border-color: $color-primary;
     display: none;
 }
 
-.Nav {
-    font-size: 1.5em;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    width: 100%;
-    max-width: $max-width;
-    display: flex;
-    justify-content: space-between;
-    padding: 10pt 20pt;
-    box-sizing: border-box;
-
-    i.fas {
-        padding: 6pt;
-        background: rgba(white, 0.3);
-        border-radius: 50%;
-    }
-}
-
 .ShowEvents {
-    position: absolute;
-    top: 0;
-    left: 3.5%;
-    width: 85%;
-    height: 75vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-width: 0.85 * $max-width;
     color: black;
     background: rgba(white, 0.95);
+    font-size: 12pt;
+    text-align: left;
+
+    position: relative;
+    transform: translateY(-45vh);
+    left: 5.5%;
+    width: 80%;
+    max-width: 0.80 * $max-width;
+    height: calc(90vh - 40pt);
+    overflow-y: auto;
+    overflow-x: hidden;
+
     padding: 15pt;
     border-top: 3px solid $color-primary;
     border-bottom: 3px solid $color-primary;
-    margin: 50pt auto 0;
-    text-align: left;
-    font-size: 12pt;
+    margin: auto 0;
     box-shadow: 0 3px 3.5px 0 rgba(0, 0, 0, .12), 0 3px 3px 1px rgba(0, 0, 0, .24);
 
     .Event {
         animation: Reveal 0.5s ease 0s both;
     }
-
     img {
         display: block;
         width: 80%;
@@ -292,7 +328,6 @@ $border-color: $color-primary;
         border: 1px solid black;
         border-radius: 5pt;
     }
-
     h1 {
         display: flex;
         justify-content: space-between;

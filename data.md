@@ -9,7 +9,7 @@
         - Bolsonaro ensina criança a fazer gesto de arma e causa revolta <https://www.youtube.com/watch?v=hpep_70CWlw>
 
 Aí Jesus disse: "Guarde a sua espada, pois quem usa a espada será morto por uma espada".
-- Mateus 22:52
+- Mateus 26:52
 
 
 ## Mestre de capoeira é morto por eleitor de Bolsonaro após declarar voto no PT (BBC Brasil)

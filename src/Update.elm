@@ -24,6 +24,7 @@ type Msg
     | ToggleRants
     | ToggleVideo
     | ToggleEvents
+    | ToggleLinks
     | Restart
     | FetchStories (Result Http.Error Model)
     | SetTransition PageTransition
@@ -74,13 +75,16 @@ updateModel msg m =
         ToggleEvents ->
             mapStory (toggleStoryState ShowCover ShowEvents) m
 
+        ToggleLinks ->
+            toggleState (FinishPage True) (FinishPage False) m
+
         FetchStories (Ok model) ->
             { m | stories = model.stories }
 
         FetchStories (Err e) ->
-            --m
-            Tuple.second ( Debug.log "Decode error" e, m )
+            m
 
+        -- Tuple.second ( Debug.log "Decode error" e, m )
         SetTransition tr ->
             { m | transition = tr }
 
@@ -89,6 +93,22 @@ updateModel msg m =
 
         NoOp ->
             m
+
+
+toggleState : AppState -> AppState -> Model -> Model
+toggleState a b m =
+    let
+        state =
+            if m.state == a then
+                b
+
+            else if m.state == b then
+                a
+
+            else
+                m.state
+    in
+    { m | state = state }
 
 
 toggleStoryState : StoryState -> StoryState -> Story -> Story
@@ -115,9 +135,9 @@ advance m =
                     { m | stories = resetStoryState tape }
 
                 ( Nothing, tape ) ->
-                    { m | state = FinishPage }
+                    { m | state = FinishPage False }
 
-        FinishPage ->
+        FinishPage bool ->
             { m
                 | state = IntroPage
                 , stories = resetStoryState (rewind m.stories)
@@ -128,7 +148,7 @@ back : Model -> Model
 back m =
     case m.state of
         IntroPage ->
-            { m | state = FinishPage }
+            { m | state = FinishPage False }
 
         ShowStory ->
             case popLeft m.stories of
@@ -138,7 +158,7 @@ back m =
                 ( Nothing, tape ) ->
                     { m | state = IntroPage }
 
-        FinishPage ->
+        FinishPage _ ->
             { m | state = ShowStory, stories = resetStoryState m.stories }
 
 

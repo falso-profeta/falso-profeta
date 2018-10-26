@@ -3,3 +3,4 @@
 .vscode/
 elm-stuff/
 repl-temp-*
+.sass-cache

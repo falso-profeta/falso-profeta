@@ -34,7 +34,7 @@ type Quote
 type AppState
     = IntroPage
     | ShowStory
-    | FinishPage
+    | FinishPage Bool
 
 
 type StoryState

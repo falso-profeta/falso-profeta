@@ -20,8 +20,8 @@ view m =
                 ShowStory ->
                     viewStory (readStory m)
 
-                FinishPage ->
-                    viewFinishPage
+                FinishPage showLinks ->
+                    viewFinishPage showLinks
 
         revealClass =
             case m.transition of
@@ -230,8 +230,8 @@ viewSource { name, url } =
     Html.cite [] [ text "Fonte: ", a [ href url ] [ text name ] ]
 
 
-viewFinishPage : Html Msg
-viewFinishPage =
+viewFinishPage : Bool -> Html Msg
+viewFinishPage showLinks =
     Ui.appLayout
         "/static/facepalm.jpg"
         False
@@ -239,24 +239,118 @@ viewFinishPage =
             "E conhecereis a verdade, e a verdade vos libertará."
             "João 8:32"
         )
-        (div [ class "ContentBox" ]
-            [ h1 [] [ text "Sobre nós" ]
-            , p []
-                [ text
-                    """
+        (if showLinks then
+            viewFinishPageLinks
+
+         else
+            viewFinishPageBox
+        )
+
+
+viewFinishPageBox : Html Msg
+viewFinishPageBox =
+    div [ class "ContentBox", style "transform" "translateY(-40pt)" ]
+        [ h1 [] [ text "Sobre nós" ]
+        , p []
+            [ text
+                """
             Expomos falas e comportamentos de Jair Bolsonaro em sua
             tragetória política e vida pública usando vídeos e textos da 
             imprensa nacional (sempre linkados), confrontando-os com passagens 
             da Bíblia. 
             """
-                ]
-            , p []
-                [ text "Tire suas próprias conclusões: Bolsonaro pauta sua vida por valores "
-                , strong [] [ text "democráticos e cristãos?" ]
-                ]
-            , div [ class "ContentBox-controls" ] [ Ui.fab Restart "fas fa-redo" ]
             ]
-        )
+        , p []
+            [ text "Tire suas próprias conclusões: Bolsonaro pauta sua vida por valores "
+            , strong [] [ text "democráticos e cristãos?" ]
+            ]
+        , p []
+            [ a [ href "#", onClick ToggleLinks ] [ text "Saiba mais" ]
+            ]
+        , div [ class "ContentBox-controls" ] [ Ui.fab Restart "fas fa-redo" ]
+        ]
+
+
+viewFinishPageLinks : Html Msg
+viewFinishPageLinks =
+    div [ class "ShowEvents" ]
+        [ h1 []
+            [ span [] [ text "Outras referências" ]
+            , a [ href "#", onClick ToggleLinks ] [ i [ class "fas fa-times" ] [] ]
+            ]
+        , linksList
+        , div [ class "back" ]
+            [ a [ href "#", onClick ToggleLinks ]
+                [ Ui.icon "fas fa-chevron-left", text " voltar" ]
+            , text " | "
+            , a [ href "#", onClick Next ]
+                [ text "reiniciar ", Ui.icon "fas fa-chevron-right" ]
+            ]
+        ]
+
+
+linksList : Html Msg
+linksList =
+    let
+        title msg =
+            h2 [] [ text msg ]
+
+        item msg source url =
+            li []
+                [ text (msg ++ " ")
+                , a [ href url, target "_blank" ] [ text ("- " ++ source) ]
+                ]
+
+        list =
+            ul []
+    in
+    div []
+        [ title "Idéias do Bolsonaro"
+        , list
+            [ item
+                "26 Bizarrices que o Bolsonaro disse"
+                "Oscar Filho do CQC"
+                "https://www.youtube.com/watch?v=DTVALGIYHsc&app=desktop"
+            , item
+                "Bolsonaro em 5 min"
+                "Mídia Ninja"
+                "https://www.youtube.com/watch?v=ghCP4r-hzYI&index=5&list=RDDTVALGIYHsc"
+            ]
+        , title "Valores cristãos"
+        , list
+            [ item
+                "Quem elogia torturador é inimigo de cristo"
+                "Leandro Karnal"
+                "https://www.youtube.com/watch?v=P069B2xlFBk&index=6&list=RDDTVALGIYHsc"
+            , item
+                "Bolsonaro Cristão"
+                "website"
+                "https://www.bolsonarocristao.com/"
+            , item
+                "Bolsonaro, milícia e o caso Marielle"
+                "Policial comenta"
+                "https://www.youtube.com/watch?v=nQ7kNOAj8YM&index=22&list=RDDTVALGIYHsc"
+            ]
+        , title "Manipulação e Fake News"
+        , list
+            [ item "dfsd" "fdfd" "dfdsoif"
+            , item
+                "Relações de Bolsonaro e técnicas de manipulação das urnas usando redes sociais (Bolsonaro e Trump)"
+                "Canal do Slow"
+                "https://www.youtube.com/watch?v=VUTiRx9wD34"
+            ]
+        , title "Autoritarismo"
+        , list
+            [ item
+                "1984: Pilares do Facismo"
+                "#meteoro.doc"
+                "https://www.youtube.com/watch?v=vgEvVdeT-xs"
+            ]
+        , title "Junte-se à causa"
+        , list
+            [ item "Como " "Vira voto" "https://instragram.com/viravoto/"
+            ]
+        ]
 
 
 last : List a -> Maybe a

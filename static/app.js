@@ -4553,7 +4553,7 @@ var elm$core$Set$toList = function (_n0) {
 	return elm$core$Dict$keys(dict);
 };
 var author$project$Model$defaultStory = {dA: '<default>', dK: 'Bolsonaro, Deputado Federal', dR: _List_Nil, c0: '', ei: _List_Nil, ek: '<default>', dk: 0, eH: '<default>', eK: ''};
-var author$project$Model$IntroPage = 0;
+var author$project$Model$IntroPage = {$: 0};
 var author$project$Model$Model = F3(
 	function (stories, state, transition) {
 		return {dk: state, a3: stories, fl: transition};
@@ -4569,7 +4569,7 @@ var author$project$Tape$single = function (x) {
 var author$project$Model$init = A3(
 	author$project$Model$Model,
 	author$project$Tape$single(author$project$Model$defaultStory),
-	0,
+	author$project$Model$IntroPage,
 	2);
 var author$project$Model$Story = F9(
 	function (state, bible, ref, utter, context, youtube, image, events, rants) {
@@ -5084,7 +5084,7 @@ var author$project$Model$modelDecoder = function () {
 		elm$json$Json$Decode$list(author$project$Model$storyDecoder));
 }();
 var author$project$Update$FetchStories = function (a) {
-	return {$: 6, a: a};
+	return {$: 8, a: a};
 };
 var elm$http$Http$Internal$EmptyBody = {$: 0};
 var elm$http$Http$emptyBody = elm$http$Http$Internal$EmptyBody;
@@ -6334,7 +6334,7 @@ var author$project$Model$FromLeft = 0;
 var author$project$Model$FromRight = 1;
 var author$project$Model$ClearTransition = 3;
 var author$project$Update$SetTransition = function (a) {
-	return {$: 7, a: a};
+	return {$: 9, a: a};
 };
 var elm$core$Process$sleep = _Process_sleep;
 var author$project$Update$setTransition = function (tr) {
@@ -6353,6 +6353,9 @@ var author$project$Update$clearTransition = F2(
 				{fl: 3}),
 			author$project$Update$setTransition(tr));
 	});
+var author$project$Model$FinishPage = function (a) {
+	return {$: 2, a: a};
+};
 var author$project$Model$ShowEvents = 3;
 var author$project$Model$ShowRants = 1;
 var author$project$Model$ShowVideo = 2;
@@ -6375,8 +6378,7 @@ var author$project$Model$mapStory = F2(
 				a3: A2(author$project$Tape$mapHead, f, m.a3)
 			});
 	});
-var author$project$Model$FinishPage = 2;
-var author$project$Model$ShowStory = 1;
+var author$project$Model$ShowStory = {$: 1};
 var author$project$Tape$popRight = function (_n0) {
 	var left = _n0.a;
 	var x = _n0.b;
@@ -6409,12 +6411,12 @@ var author$project$Update$resetStoryState = function (tape) {
 };
 var author$project$Update$advance = function (m) {
 	var _n0 = m.dk;
-	switch (_n0) {
+	switch (_n0.$) {
 		case 0:
 			return _Utils_update(
 				m,
 				{
-					dk: 1,
+					dk: author$project$Model$ShowStory,
 					a3: author$project$Update$resetStoryState(m.a3)
 				});
 		case 1:
@@ -6432,13 +6434,16 @@ var author$project$Update$advance = function (m) {
 				var tape = _n1.b;
 				return _Utils_update(
 					m,
-					{dk: 2});
+					{
+						dk: author$project$Model$FinishPage(false)
+					});
 			}
 		default:
+			var bool = _n0.a;
 			return _Utils_update(
 				m,
 				{
-					dk: 0,
+					dk: author$project$Model$IntroPage,
 					a3: author$project$Update$resetStoryState(
 						author$project$Tape$rewind(m.a3))
 				});
@@ -6466,11 +6471,13 @@ var author$project$Tape$popLeft = function (_n0) {
 };
 var author$project$Update$back = function (m) {
 	var _n0 = m.dk;
-	switch (_n0) {
+	switch (_n0.$) {
 		case 0:
 			return _Utils_update(
 				m,
-				{dk: 2});
+				{
+					dk: author$project$Model$FinishPage(false)
+				});
 		case 1:
 			var _n1 = author$project$Tape$popLeft(m.a3);
 			if (!_n1.a.$) {
@@ -6486,17 +6493,24 @@ var author$project$Update$back = function (m) {
 				var tape = _n1.b;
 				return _Utils_update(
 					m,
-					{dk: 0});
+					{dk: author$project$Model$IntroPage});
 			}
 		default:
 			return _Utils_update(
 				m,
 				{
-					dk: 1,
+					dk: author$project$Model$ShowStory,
 					a3: author$project$Update$resetStoryState(m.a3)
 				});
 	}
 };
+var author$project$Update$toggleState = F3(
+	function (a, b, m) {
+		var state = _Utils_eq(m.dk, a) ? b : (_Utils_eq(m.dk, b) ? a : m.dk);
+		return _Utils_update(
+			m,
+			{dk: state});
+	});
 var author$project$Update$toggleStoryState = F3(
 	function (a, b, st) {
 		return _Utils_eq(st.dk, b) ? _Utils_update(
@@ -6528,6 +6542,12 @@ var author$project$Update$updateModel = F2(
 					A2(author$project$Update$toggleStoryState, 0, 3),
 					m);
 			case 6:
+				return A3(
+					author$project$Update$toggleState,
+					author$project$Model$FinishPage(true),
+					author$project$Model$FinishPage(false),
+					m);
+			case 8:
 				if (!msg.a.$) {
 					var model = msg.a.a;
 					return _Utils_update(
@@ -6537,11 +6557,15 @@ var author$project$Update$updateModel = F2(
 					var e = msg.a.a;
 					return m;
 				}
-			case 7:
+			case 9:
 				var tr = msg.a;
 				return _Utils_update(
 					m,
 					{fl: tr});
+			case 7:
+				return _Utils_update(
+					m,
+					{dk: author$project$Model$IntroPage});
 			default:
 				return m;
 		}
@@ -6641,79 +6665,16 @@ var author$project$Ui$attrsFromQuote = function (st) {
 			A2(elm$html$Html$Attributes$style, 'font-size', '1.05em')
 		]) : _List_Nil));
 };
+var author$project$Update$Restart = {$: 7};
+var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$blockquote = _VirtualDom_node('blockquote');
 var elm$html$Html$cite = _VirtualDom_node('cite');
 var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$i = _VirtualDom_node('i');
 var elm$html$Html$span = _VirtualDom_node('span');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
-var author$project$Ui$appLayout = F3(
-	function (url, _n0, child) {
-		var quote = _n0.a;
-		var from = _n0.b;
-		return A2(
-			elm$html$Html$div,
-			_List_fromArray(
-				[
-					elm$html$Html$Attributes$class('App'),
-					A2(
-					elm$html$Html$Attributes$style,
-					'background-image',
-					author$project$Ui$asUrl(url))
-				]),
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$div,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$class('Quote')
-						]),
-					_List_fromArray(
-						[
-							A2(
-							elm$html$Html$blockquote,
-							author$project$Ui$attrsFromQuote(quote),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$span,
-									_List_Nil,
-									_List_fromArray(
-										[
-											elm$html$Html$text(quote)
-										]))
-								])),
-							A2(
-							elm$html$Html$cite,
-							_List_Nil,
-							_List_fromArray(
-								[
-									elm$html$Html$text(from)
-								]))
-						])),
-					A2(
-					elm$html$Html$div,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$class('MainContent')
-						]),
-					_List_fromArray(
-						[child]))
-				]));
-	});
-var elm$html$Html$i = _VirtualDom_node('i');
-var author$project$Ui$icon = function (which) {
-	return A2(
-		elm$html$Html$i,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class(which)
-			]),
-		_List_Nil);
-};
-var elm$html$Html$button = _VirtualDom_node('button');
 var elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 0, a: a};
 };
@@ -6731,6 +6692,102 @@ var elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		elm$json$Json$Decode$succeed(msg));
 };
+var author$project$Ui$appLayout = F4(
+	function (url, linkInit, _n0, child) {
+		var quote = _n0.a;
+		var from = _n0.b;
+		var quoteDiv = A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('Quote')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$blockquote,
+					author$project$Ui$attrsFromQuote(quote),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$span,
+							_List_Nil,
+							_List_fromArray(
+								[
+									elm$html$Html$text(quote)
+								]))
+						])),
+					A2(
+					elm$html$Html$cite,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text(from)
+						]))
+				]));
+		var contentDiv = A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('MainContent')
+				]),
+			_List_fromArray(
+				[child]));
+		var children = linkInit ? _List_fromArray(
+			[
+				quoteDiv,
+				contentDiv,
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('InitLink')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$a,
+						_List_fromArray(
+							[
+								elm$html$Html$Events$onClick(author$project$Update$Restart),
+								elm$html$Html$Attributes$href('#')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$i,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('fas fa-chevron-left')
+									]),
+								_List_Nil),
+								elm$html$Html$text(' início')
+							]))
+					]))
+			]) : _List_fromArray(
+			[quoteDiv, contentDiv]);
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('App'),
+					A2(
+					elm$html$Html$Attributes$style,
+					'background-image',
+					author$project$Ui$asUrl(url))
+				]),
+			children);
+	});
+var author$project$Ui$icon = function (which) {
+	return A2(
+		elm$html$Html$i,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class(which)
+			]),
+		_List_Nil);
+};
+var elm$html$Html$button = _VirtualDom_node('button');
 var author$project$Ui$fab = F2(
 	function (msg, cls) {
 		return A2(
@@ -6738,71 +6795,224 @@ var author$project$Ui$fab = F2(
 			_List_fromArray(
 				[
 					elm$html$Html$Events$onClick(msg),
-					elm$html$Html$Attributes$class('Fab')
+					elm$html$Html$Attributes$class('FabButton')
 				]),
 			_List_fromArray(
 				[
 					author$project$Ui$icon(cls)
 				]));
 	});
+var author$project$Update$ToggleLinks = {$: 6};
 var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$p = _VirtualDom_node('p');
 var elm$html$Html$strong = _VirtualDom_node('strong');
-var author$project$View$viewFinishPage = A3(
-	author$project$Ui$appLayout,
-	'/static/facepalm.jpg',
-	A2(author$project$Model$Quote, 'E conhecereis a verdade, e a verdade vos libertará.', 'João 8:32'),
-	A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('ContentBox')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$h1,
+var author$project$View$viewFinishPageBox = A2(
+	elm$html$Html$div,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('ContentBox'),
+			A2(elm$html$Html$Attributes$style, 'transform', 'translateY(-40pt)')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Sobre nós')
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('\n            Expomos falas e comportamentos de Jair Bolsonaro em sua\n            tragetória política e vida pública usando vídeos e textos da \n            imprensa nacional (sempre linkados), confrontando-os com passagens \n            da Bíblia. \n            ')
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('Tire suas próprias conclusões: Bolsonaro pauta sua vida por valores '),
+					A2(
+					elm$html$Html$strong,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('democráticos e cristãos?')
+						]))
+				])),
+			A2(
+			elm$html$Html$p,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('#'),
+							elm$html$Html$Events$onClick(author$project$Update$ToggleLinks)
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('Saiba mais')
+						]))
+				])),
+			A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('ContentBox-controls')
+				]),
+			_List_fromArray(
+				[
+					A2(author$project$Ui$fab, author$project$Update$Restart, 'fas fa-redo')
+				]))
+		]));
+var elm$html$Html$h2 = _VirtualDom_node('h2');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$ul = _VirtualDom_node('ul');
+var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
+var author$project$View$linksList = function () {
+	var title = function (msg) {
+		return A2(
+			elm$html$Html$h2,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text(msg)
+				]));
+	};
+	var list = elm$html$Html$ul(_List_Nil);
+	var item = F3(
+		function (msg, source, url) {
+			return A2(
+				elm$html$Html$li,
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text('Sobre nós')
-					])),
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('\n            Expomos falas e comportamentos de Jair Bolsonaro em sua\n            tragetória política e vida pública usando vídeos e textos da \n            imprensa nacional (sempre linkados), confrontando-os com passagens \n            da Bíblia. \n            ')
-					])),
-				A2(
-				elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Tire suas próprias conclusões: Bolsonaro pauta sua vida por valores '),
+						elm$html$Html$text(msg + ' '),
 						A2(
-						elm$html$Html$strong,
-						_List_Nil,
+						elm$html$Html$a,
 						_List_fromArray(
 							[
-								elm$html$Html$text('democráticos e cristãos?')
+								elm$html$Html$Attributes$href(url),
+								elm$html$Html$Attributes$target('_blank')
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text('- ' + source)
 							]))
+					]));
+		});
+	return A2(
+		elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				title('Manipulação e Fake News'),
+				list(
+				_List_fromArray(
+					[
+						A3(item, 'dfsd', 'fdfd', 'dfdsoif'),
+						A3(item, 'Relações de Bolsonaro e técnicas de manipulação das urnas usando redes sociais (Bolsonaro e Trump)', 'Canal do Slow', 'https://www.youtube.com/watch?v=VUTiRx9wD34')
 					])),
-				A2(
-				elm$html$Html$div,
+				title('Junte-se à causa'),
+				list(
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('ContentBox-controls')
-					]),
-				_List_fromArray(
-					[
-						A2(author$project$Ui$fab, author$project$Update$Next, 'fas fa-redo')
+						A3(item, 'Como ', 'Vira voto', 'https://instragram.com/viravoto/')
 					]))
-			])));
-var elm$html$Html$a = _VirtualDom_node('a');
-var author$project$View$viewIntroPage = A3(
+			]));
+}();
+var author$project$View$viewFinishPageLinks = A2(
+	elm$html$Html$div,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('ShowEvents')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$h1,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Outras referências')
+						])),
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('#'),
+							elm$html$Html$Events$onClick(author$project$Update$ToggleLinks)
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$i,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('fas fa-times')
+								]),
+							_List_Nil)
+						]))
+				])),
+			author$project$View$linksList,
+			A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('back')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('#'),
+							elm$html$Html$Events$onClick(author$project$Update$ToggleLinks)
+						]),
+					_List_fromArray(
+						[
+							author$project$Ui$icon('fas fa-chevron-left'),
+							elm$html$Html$text(' voltar')
+						])),
+					elm$html$Html$text(' | '),
+					A2(
+					elm$html$Html$a,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$href('#'),
+							elm$html$Html$Events$onClick(author$project$Update$Next)
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('reiniciar '),
+							author$project$Ui$icon('fas fa-chevron-right')
+						]))
+				]))
+		]));
+var author$project$View$viewFinishPage = function (showLinks) {
+	return A4(
+		author$project$Ui$appLayout,
+		'/static/facepalm.jpg',
+		false,
+		A2(author$project$Model$Quote, 'E conhecereis a verdade, e a verdade vos libertará.', 'João 8:32'),
+		showLinks ? author$project$View$viewFinishPageLinks : author$project$View$viewFinishPageBox);
+};
+var author$project$View$viewIntroPage = A4(
 	author$project$Ui$appLayout,
 	'/static/cruz.jpg',
+	false,
 	A2(author$project$Model$Quote, '\n            E surgirão muitos falsos profetas e enganarão muitos. \n            E, por se multiplicar a iniquidade, o amor de muitos se esfriará.\n            ', 'Mateus 24:11-12'),
 	A2(
 		elm$html$Html$div,
@@ -6891,6 +7101,7 @@ var author$project$Ui$youtubeIframe = F2(
 				[
 					elm$html$Html$Attributes$width(500),
 					elm$html$Html$Attributes$height(375),
+					A2(elm$html$Html$Attributes$attribute, 'max-width', '100%'),
 					elm$html$Html$Attributes$class(cls),
 					elm$html$Html$Attributes$src(url),
 					A2(
@@ -6977,10 +7188,8 @@ var author$project$View$viewSource = function (_n0) {
 					]))
 			]));
 };
-var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$Attributes$alt = elm$html$Html$Attributes$stringProperty('alt');
-var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
 var author$project$View$viewEvent = function (_n0) {
 	var title = _n0.fk;
 	var text = _n0.ex;
@@ -7159,15 +7368,64 @@ var author$project$View$viewRant = function (rant) {
 					])),
 			links));
 };
+var elm$core$List$isEmpty = function (xs) {
+	if (!xs.b) {
+		return true;
+	} else {
+		return false;
+	}
+};
 var author$project$View$viewShowMore = function (st) {
 	var showMoreClass = function () {
 		var _n0 = st.dk;
 		if (_n0 === 1) {
-			return elm$html$Html$Attributes$class('ContentBox rants');
+			return elm$html$Html$Attributes$class('ContentBox ContentBox--rants');
 		} else {
 			return elm$html$Html$Attributes$class('ContentBox');
 		}
 	}();
+	var backCover = A2(
+		elm$html$Html$a,
+		_List_fromArray(
+			[
+				elm$html$Html$Events$onClick(author$project$Update$ToggleRants),
+				elm$html$Html$Attributes$href('#')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$i,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('fas fa-chevron-left')
+					]),
+				_List_Nil),
+				elm$html$Html$text(' voltar')
+			]));
+	var navChildren = elm$core$List$isEmpty(st.ei) ? _List_fromArray(
+		[backCover]) : _List_fromArray(
+		[
+			backCover,
+			elm$html$Html$text(' | '),
+			A2(
+			elm$html$Html$a,
+			_List_fromArray(
+				[
+					elm$html$Html$Events$onClick(author$project$Update$ToggleEvents),
+					elm$html$Html$Attributes$href('#')
+				]),
+			_List_fromArray(
+				[
+					elm$html$Html$text('consequências '),
+					A2(
+					elm$html$Html$i,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('fas fa-chevron-right')
+						]),
+					_List_Nil)
+				]))
+		]);
 	return A2(
 		elm$html$Html$div,
 		_List_fromArray(
@@ -7257,53 +7515,15 @@ var author$project$View$viewShowMore = function (st) {
 								[
 									elm$html$Html$Attributes$class('Rants-nav')
 								]),
-							_List_fromArray(
-								[
-									A2(
-									elm$html$Html$a,
-									_List_fromArray(
-										[
-											elm$html$Html$Events$onClick(author$project$Update$ToggleRants),
-											elm$html$Html$Attributes$href('#')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											elm$html$Html$i,
-											_List_fromArray(
-												[
-													elm$html$Html$Attributes$class('fas fa-chevron-left')
-												]),
-											_List_Nil),
-											elm$html$Html$text(' voltar')
-										])),
-									elm$html$Html$text(' | '),
-									A2(
-									elm$html$Html$a,
-									_List_fromArray(
-										[
-											elm$html$Html$Events$onClick(author$project$Update$ToggleEvents),
-											elm$html$Html$Attributes$href('#')
-										]),
-									_List_fromArray(
-										[
-											elm$html$Html$text('consequências '),
-											A2(
-											elm$html$Html$i,
-											_List_fromArray(
-												[
-													elm$html$Html$Attributes$class('fas fa-chevron-right')
-												]),
-											_List_Nil)
-										]))
-								]))
+							navChildren)
 						])))
 			]));
 };
 var author$project$View$viewStory = function (st) {
-	return A3(
+	return A4(
 		author$project$Ui$appLayout,
 		st.c0,
+		true,
 		A2(author$project$Model$Quote, st.dA, st.ek),
 		(st.dk === 3) ? author$project$View$viewEvents(st) : ((st.dk === 2) ? author$project$View$showVideoOverlay(st) : author$project$View$viewShowMore(st)));
 };
@@ -7323,14 +7543,15 @@ var author$project$View$view = function (m) {
 	}();
 	var content = function () {
 		var _n0 = m.dk;
-		switch (_n0) {
+		switch (_n0.$) {
 			case 0:
 				return author$project$View$viewIntroPage;
 			case 1:
 				return author$project$View$viewStory(
 					author$project$Model$readStory(m));
 			default:
-				return author$project$View$viewFinishPage;
+				var showLinks = _n0.a;
+				return author$project$View$viewFinishPage(showLinks);
 		}
 	}();
 	return A2(

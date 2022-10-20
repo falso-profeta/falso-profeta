@@ -1,4 +1,4 @@
-module View exposing (view)
+module View exposing (view, viewWrapper)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -10,7 +10,11 @@ import Update exposing (Msg(..))
 
 
 view : Model -> Html.Html Msg
-view m =
+view = viewWrapper Ui.styleElements
+
+
+viewWrapper : List (Html.Html Msg) -> Model -> Html.Html Msg
+viewWrapper styles m =
     let
         content =
             case m.state of
@@ -38,7 +42,7 @@ view m =
                     "ResetAnimation"
     in
     div [ class revealClass ]
-        (Ui.styleElements ++ [ content ])
+        (styles ++ [ content ])
 
 
 viewIntroPage : Html Msg
@@ -57,7 +61,7 @@ viewIntroPage =
             [ h1 []
                 [ text "A política brasileira está cheia de falsos profetas." ]
             , p []
-                [ text "Eles se dizem cristãos, mas na verdade propagam a intolerância. O deputado "
+                [ text "Eles se dizem cristãos, mas na verdade propagam a intolerância. O presidente "
                 , strong [] [ text "Jair Messias Bolsonaro" ]
                 , text " é um deles."
                 ]
@@ -308,15 +312,15 @@ linksList =
         [ title "Idéias do Bolsonaro"
         , list
             [ item
-                "26 Bizarrices que o Bolsonaro disse"
-                "Oscar Filho do CQC"
-                "https://www.youtube.com/watch?v=DTVALGIYHsc&app=desktop"
-            , item
                 "Bolsonaro em 5 min"
                 "Mídia Ninja"
                 "https://www.youtube.com/watch?v=ghCP4r-hzYI&index=5&list=RDDTVALGIYHsc"
+            , item
+                "26 Bizarrices que o Bolsonaro disse"
+                "Oscar Filho do CQC"
+                "https://www.youtube.com/watch?v=DTVALGIYHsc&app=desktop"
             ]
-        , title "Valores cristãos"
+        , title "Bolsonaro vs a palavra de cristo"
         , list
             [ item
                 "Quem elogia torturador é inimigo de cristo"
@@ -331,20 +335,16 @@ linksList =
                 "Policial comenta"
                 "https://www.youtube.com/watch?v=nQ7kNOAj8YM&index=22&list=RDDTVALGIYHsc"
             ]
-        , title "Manipulação e Fake News"
-        , list
-            [ item "dfsd" "fdfd" "dfdsoif"
-            , item
-                "Relações de Bolsonaro e técnicas de manipulação das urnas usando redes sociais (Bolsonaro e Trump)"
-                "Canal do Slow"
-                "https://www.youtube.com/watch?v=VUTiRx9wD34"
-            ]
-        , title "Autoritarismo"
+        , title "Autoritarismo e violência"
         , list
             [ item
                 "1984: Pilares do Facismo"
                 "#meteoro.doc"
                 "https://www.youtube.com/watch?v=vgEvVdeT-xs"
+            , item
+                "Relações de Bolsonaro e técnicas de manipulação das urnas usando redes sociais (Bolsonaro e Trump)"
+                "Canal do Slow"
+                "https://www.youtube.com/watch?v=VUTiRx9wD34"
             ]
         , title "Junte-se à causa"
         , list

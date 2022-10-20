@@ -1,7 +1,6 @@
 import re
 import json
 from pprint import pprint
-from yaml import safe_load
 import toolz
 
 h1_regex = re.compile(r'^#\s*([^\n]*)')

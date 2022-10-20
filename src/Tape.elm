@@ -62,12 +62,12 @@ goLeft (Tape left x right) =
 
 
 hasRight : Tape a -> Bool
-hasRight (Tape left x right) =
+hasRight (Tape _ _ right) =
     not (List.isEmpty right)
 
 
 hasLeft : Tape a -> Bool
-hasLeft (Tape left x right) =
+hasLeft (Tape left _ _) =
     not (List.isEmpty left)
 
 
@@ -112,12 +112,12 @@ forward (Tape left x right) =
 
 
 read : Tape a -> a
-read (Tape left x right) =
+read (Tape _ x _) =
     x
 
 
 write : a -> Tape a -> Tape a
-write y (Tape left x right) =
+write y (Tape left _ right) =
     Tape left y right
 
 

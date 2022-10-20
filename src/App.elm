@@ -1,4 +1,4 @@
-module App exposing (main)
+module App exposing (main, mainWrapper)
 
 import Browser
 import Browser.Events exposing (onAnimationFrameDelta, onKeyDown, onKeyUp, onResize)
@@ -12,17 +12,19 @@ import View
 
 
 main : Program Value Model Msg
-main =
-    Browser.element
-        { init = \flags -> ( Model.init, getJsonRequest )
+main = mainWrapper View.view
+    
+        
+mainWrapper view =
+  Browser.element
+        { init = \_ -> ( Model.init, getJsonRequest )
         , update = Update.update
         , subscriptions = subscriptions
-        , view = View.view
+        , view = view
         }
 
-
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.batch
         [ onKeyDown (Decode.map key keyCode) ]
 
@@ -42,4 +44,8 @@ key keycode =
 
 getJsonRequest : Cmd Msg
 getJsonRequest =
-    Http.send FetchStories (Http.get "/static/data.json" modelDecoder)
+    Http.get 
+        { url = "/static/data.json"
+        , expect = Http.expectJson FetchStories modelDecoder 
+        }
+

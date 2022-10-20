@@ -12,7 +12,6 @@ import Html exposing (..)
 import Html.Attributes as Attr exposing (..)
 import Html.Events exposing (..)
 import Html.Lazy exposing (lazy)
-import Json.Decode
 import Json.Encode
 import Model exposing (..)
 import Update exposing (Msg(..))
@@ -82,12 +81,6 @@ attrsFromQuote st =
 
 --- PAGE ITEMS -----------------------------------------------------------------
 
-
-mainQuote : Quote -> Html msg
-mainQuote quote =
-    div [] []
-
-
 youtubeIframe : String -> Url -> Html msg
 youtubeIframe cls url =
     iframe
@@ -127,19 +120,17 @@ fab msg cls =
 --- RESOURCES -----------------------------------------------------------------
 
 
-styleSheet : Url -> Html msg
-styleSheet url =
-    node "link"
-        [ attribute "rel" "stylesheet"
-        , href url
-        ]
-        []
+
 
 
 styleElements : List (Html msg)
 styleElements =
-    [ styleSheet "https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto+Mono"
-    , styleSheet "https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-    , styleSheet "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
-    , styleSheet "/static/main.css"
-    ]
+    let 
+        styleSheet url =
+            node "link" [ attribute "rel" "stylesheet", href url ] []
+    in
+        [ styleSheet "https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto+Mono"
+        , styleSheet "https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        , styleSheet "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+        , styleSheet "/static/main.css"
+        ]

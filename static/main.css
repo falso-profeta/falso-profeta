@@ -62,8 +62,7 @@ body {
   font-family: Roboto Slab, sans;
   font-size: 11pt;
   box-sizing: border-box;
-  background: #3aa url("/falso-profeta/static/bg2.png") repeat;
-  background: #3aa url("./static/bg2.png") repeat; }
+  background: #3aa url(".bg2.png") repeat; }
   @media only screen and (min-width: 500px) {
     body {
       font-size: 13pt; } }

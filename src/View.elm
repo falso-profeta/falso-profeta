@@ -48,7 +48,7 @@ viewWrapper styles m =
 viewIntroPage : Html Msg
 viewIntroPage =
     Ui.appLayout
-        "/static/cruz.jpg"
+        "./static/cruz.jpg"
         False
         (Quote
             """
@@ -76,7 +76,7 @@ viewIntroPage =
 viewStory : Story -> Html Msg
 viewStory st =
     Ui.appLayout
-        st.image
+        ("." ++ st.image)
         True
         (Quote st.bible st.ref)
         (if st.state == ShowEvents then
@@ -237,7 +237,7 @@ viewSource { name, url } =
 viewFinishPage : Bool -> Html Msg
 viewFinishPage showLinks =
     Ui.appLayout
-        "/static/facepalm.jpg"
+        "./static/facepalm.jpg"
         False
         (Quote
             "E conhecereis a verdade, e a verdade vos libertará."

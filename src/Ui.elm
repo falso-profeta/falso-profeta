@@ -132,5 +132,5 @@ styleElements =
         [ styleSheet "https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto+Mono"
         , styleSheet "https://use.fontawesome.com/releases/v5.4.1/css/all.css"
         , styleSheet "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
-        , styleSheet "/static/main.css"
+        , styleSheet "./static/main.css"
         ]

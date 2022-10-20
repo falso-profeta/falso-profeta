@@ -45,7 +45,7 @@ key keycode =
 getJsonRequest : Cmd Msg
 getJsonRequest =
     Http.get 
-        { url = "/static/data.json"
+        { url = "./static/data.json"
         , expect = Http.expectJson FetchStories modelDecoder 
         }
 

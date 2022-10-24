@@ -12,16 +12,18 @@ import View
 
 
 main : Program Value Model Msg
-main = mainWrapper View.view
-    
-        
+main =
+    mainWrapper View.view
+
+
 mainWrapper view =
-  Browser.element
+    Browser.element
         { init = \_ -> ( Model.init, getJsonRequest )
         , update = Update.update
         , subscriptions = subscriptions
         , view = view
         }
+
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
@@ -44,8 +46,7 @@ key keycode =
 
 getJsonRequest : Cmd Msg
 getJsonRequest =
-    Http.get 
+    Http.get
         { url = "./static/data.json"
-        , expect = Http.expectJson FetchStories modelDecoder 
+        , expect = Http.expectJson FetchStories modelDecoder
         }
-

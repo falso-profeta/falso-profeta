@@ -40,7 +40,7 @@ appLayout url linkInit (Quote quote from) child =
                 , div [ class "InitLink" ]
                     [ a
                         [ onClick Restart, href "#" ]
-                        [ i [class "fas fa-chevron-left"] [], text " início" ]
+                        [ i [ class "fas fa-chevron-left" ] [], text " início" ]
                     ]
                 ]
 
@@ -81,6 +81,7 @@ attrsFromQuote st =
 
 --- PAGE ITEMS -----------------------------------------------------------------
 
+
 youtubeIframe : String -> Url -> Html msg
 youtubeIframe cls url =
     iframe
@@ -120,17 +121,14 @@ fab msg cls =
 --- RESOURCES -----------------------------------------------------------------
 
 
-
-
-
 styleElements : List (Html msg)
 styleElements =
-    let 
+    let
         styleSheet url =
             node "link" [ attribute "rel" "stylesheet", href url ] []
     in
-        [ styleSheet "https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto+Mono"
-        , styleSheet "https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-        , styleSheet "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
-        , styleSheet "./static/main.css"
-        ]
+    [ styleSheet "https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto+Mono"
+    , styleSheet "https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    , styleSheet "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+    , styleSheet "./static/main.css"
+    ]

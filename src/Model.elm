@@ -78,7 +78,7 @@ type alias Story =
     , bible : String
     , ref : String
     , utter : String
-    , context: String
+    , context : String
     , youtube : Url
     , image : Url
     , events : List Event

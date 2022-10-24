@@ -1,10 +1,10 @@
 module AppProduction exposing (main)
 
 import App
-import View
+import Json.Encode exposing (Value)
 import Model exposing (Model)
 import Update exposing (Msg(..))
-import Json.Encode exposing (Value)
+import View
 
 
 main : Program Value Model Msg

@@ -10,7 +10,8 @@ import Update exposing (Msg(..))
 
 
 view : Model -> Html.Html Msg
-view = viewWrapper Ui.styleElements
+view =
+    viewWrapper Ui.styleElements
 
 
 viewWrapper : List (Html.Html Msg) -> Model -> Html.Html Msg
@@ -59,11 +60,10 @@ viewIntroPage =
         )
         (div [ class "ContentBox delay" ]
             [ h1 []
-                [ text "A política brasileira está cheia de falsos profetas." ]
+                [ text "A política é cheia de falsos profetas." ]
             , p []
-                [ text "Eles se dizem cristãos, mas na verdade propagam a intolerância. O presidente "
-                , strong [] [ text "Jair Messias Bolsonaro" ]
-                , text " é um deles."
+                [ strong [] [ text "Bolsonaro" ]
+                , text " é um deles. Se diz cristão, mas sempre age contra a palavra de Cristo."
                 ]
             , a
                 [ href "#", onClick Next ]

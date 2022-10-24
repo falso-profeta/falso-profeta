@@ -5,11 +5,11 @@ import Model
     exposing
         ( AppState(..)
         , Model
-        , PageTransition(..)
         , Story
         , StoryState(..)
         , mapStory
         , readStory
+        , TransitionState(..)
         )
 import Process
 import Tape exposing (..)
@@ -26,72 +26,65 @@ type Msg
     | ToggleLinks
     | Restart
     | FetchStories (Result Http.Error Model)
-    | SetTransition PageTransition
+    | Transition (Maybe TransitionState) (Maybe TransitionState) Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg m =
-    let
-        new =
-            updateModel msg m
-    in
     case msg of
         Next ->
-            clearTransition FromLeft new
-
+            (advance m, Cmd.none )
+        
         Prev ->
-            clearTransition FromRight new
-
-        _ ->
-            ( new, Cmd.none )
-
-
-setTransition : PageTransition -> Cmd Msg
-setTransition tr =
-    Task.perform (\_ -> SetTransition tr) (Process.sleep 0)
-
-
-clearTransition : PageTransition -> Model -> ( Model, Cmd Msg )
-clearTransition tr m =
-    ( { m | transition = ClearTransition }, setTransition tr )
-
-
-updateModel : Msg -> Model -> Model
-updateModel msg m =
-    case msg of
-        Next ->
-            advance m
-
-        Prev ->
-            back m
+            (back m, Cmd.none )
 
         ToggleRants ->
-            mapStory (toggleStoryState ShowCover ShowRants) m
+            (mapStory (toggleStoryState ShowCover ShowRants) m, Cmd.none )
 
         ToggleVideo ->
-            mapStory (toggleStoryState ShowCover ShowVideo) m
+            (mapStory (toggleStoryState ShowCover ShowVideo) m, Cmd.none )
 
         ToggleEvents ->
-            mapStory (toggleStoryState ShowCover ShowEvents) m
+            (mapStory (toggleStoryState ShowCover ShowEvents) m, Cmd.none )
 
         ToggleLinks ->
-            toggleState (FinishPage True) (FinishPage False) m
+            (toggleState (FinishPage True) (FinishPage False) m, Cmd.none )
 
         FetchStories (Ok model) ->
-            { m | stories = model.stories }
+            ({ m | stories = model.stories }, Cmd.none )
 
         FetchStories (Err e) ->
-            m
-
-        -- Tuple.second ( Debug.log "Decode error" e, m )
-        SetTransition tr ->
-            { m | transition = tr }
+            (m, Cmd.none)
 
         Restart ->
-            { m | state = IntroPage }
+            ({ m | state = IntroPage }, Cmd.none )
 
-        NoOp ->
-            m
+        Transition pre post nextMsg ->
+            case (pre, post) of
+                (Nothing, Nothing) ->
+                    (m, Cmd.none)
+                (Nothing, Just step) ->
+                    let
+                        (new, _) = update nextMsg m
+                        task = Task.perform (\_ -> Transition Nothing Nothing nextMsg) (Process.sleep (duration step))
+                    in
+                    ({ new | transition = step }, task)
+                (Just step, _) -> 
+                    let 
+                        task = Task.perform (\_ -> Transition Nothing post nextMsg) (Process.sleep (duration step)) 
+                    in 
+                    ( { m | transition = step }, task )
+
+        _ ->
+            (m, Cmd.none )
+
+duration : TransitionState -> Float
+duration step = 
+    case step of
+        FadeOut -> 150
+        Reset -> 1
+        FromLeft -> 250
+        FromRight -> 250
 
 
 toggleState : AppState -> AppState -> Model -> Model
@@ -158,7 +151,7 @@ back m =
                     { m | state = IntroPage }
 
         FinishPage _ ->
-            { m | state = ShowStory, stories = resetStoryState m.stories }
+            { m | state = ShowStory, stories = m.stories |> resetStoryState  |> rewind }
 
 
 resetStoryState : Tape Story -> Tape Story

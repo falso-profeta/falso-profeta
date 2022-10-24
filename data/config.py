@@ -5,7 +5,7 @@ PATH = Path(__file__).parent
 FILES = [
     "amor",
     "corrupcao",
-    "extract",
+    "ditadura",
     "ganancia",
     "imigrantes",
     "intolerancia",

@@ -108,7 +108,7 @@ forward (Tape left x right) =
             Tape left x right
 
         y :: ys ->
-            rewind (Tape (x :: left) y ys)
+            forward (Tape (x :: left) y ys)
 
 
 read : Tape a -> a

@@ -1,6 +1,7 @@
 module Ui exposing
     ( appLayout
     , fab
+    , fabText
     , icon
     , styleElements
     , youtubeIframe
@@ -115,6 +116,13 @@ icon which =
 fab : msg -> String -> Html msg
 fab msg cls =
     button [ onClick msg, class "FabButton" ] [ icon cls ]
+
+
+fabText : msg -> String -> Html msg
+fabText msg txt =
+    button 
+        [ onClick msg, class "FabButton", style "border-radius" "20px", style "padding" "0 0.5em", style "width" "inherit" ] 
+        [ span [ style "font-size" "70%", style "padding" "0.5em" ] [ text txt ] ]
 
 
 

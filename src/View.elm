@@ -27,7 +27,7 @@ viewWrapper styles m =
 
                 FinishPage showLinks ->
                     viewFinishPage showLinks
-
+                
         revealClass =
             case m.transition of
                 FromLeft ->
@@ -36,10 +36,10 @@ viewWrapper styles m =
                 FromRight ->
                     "FromRight"
 
-                Neutral ->
-                    "Reveal"
-
-                ClearTransition ->
+                FadeOut ->
+                    "FadeOut"
+                
+                Reset ->
                     "ResetAnimation"
     in
     div [ class revealClass ]
@@ -62,12 +62,13 @@ viewIntroPage =
             [ h1 []
                 [ text "A política é cheia de falsos profetas." ]
             , p []
-                [ strong [] [ text "Bolsonaro" ]
-                , text " é um deles. Se diz cristão, mas sempre age contra a palavra de Cristo."
+                [ text "Será que "
+                , strong [] [ text "Bolsonaro" ]
+                , text " é um deles? Ele diz cristão, mas vamos ver suas ações."
                 ]
             , a
                 [ href "#", onClick Next ]
-                [ text "saiba mais" ]
+                [ text "continue..." ]
             , div [ class "ContentBox-controls" ] [ Ui.fab Next "fas fa-chevron-right" ]
             ]
         )
@@ -115,14 +116,21 @@ viewShowMore st =
                 [ backCover
                 , text " | "
                 , a [ onClick ToggleEvents, href "#" ]
-                    [ text "consequências "
+                    [ text "notícias "
                     , i [ class "fas fa-chevron-right" ] []
                     ]
                 ]
+
+        fabMiddle =
+            if st.state == ShowRants then
+                Ui.fab ToggleRants "fas fa-minus"
+
+            else
+                Ui.fabText ToggleRants "saiba mais"
     in
     div [ showMoreClass ]
-        [ p [ style "color" "#000b" ] [ text "o que diz Jair..." ]
-        , div [] [ q [] [ text st.utter ] ]
+        [ -- p [ style "color" "#000b" ] [ text "a palavra de Bolsonaro:" ]
+         div [] [ q [] [ text st.utter ] ]
         , Html.cite [ style "color" "#000b" ]
             [ text ("- " ++ st.context)
             ]
@@ -133,15 +141,9 @@ viewShowMore st =
                 [ text "veja o vídeo" ]
             ]
         , div [ class "ContentBox-controls" ]
-            [ Ui.fab Prev "fas fa-chevron-left"
-            , Ui.fab ToggleRants
-                (if st.state == ShowRants then
-                    "fas fa-minus"
-
-                 else
-                    "fas fa-plus"
-                )
-            , Ui.fab Next "fas fa-chevron-right"
+                [ Ui.fab (fade Prev FromRight) "fas fa-chevron-left"
+                , fabMiddle
+                , Ui.fab (fade Next FromLeft) "fas fa-chevron-right"
             ]
         , div [ class "Rants" ]
             (List.map viewRant st.rants
@@ -149,6 +151,8 @@ viewShowMore st =
             )
         ]
 
+fade cmd cls = 
+    (Transition (Just FadeOut) (Just cls) cmd) 
 
 showVideoOverlay : Story -> Html Msg
 showVideoOverlay st =

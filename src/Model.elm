@@ -2,12 +2,12 @@ module Model exposing
     ( AppState(..)
     , Event
     , Model
-    , PageTransition(..)
     , Quote(..)
     , Rant
     , Source
     , Story
     , StoryState(..)
+    , TransitionState(..)
     , Url
     , init
     , mapStory
@@ -36,25 +36,22 @@ type AppState
     | ShowStory
     | FinishPage Bool
 
-
 type StoryState
     = ShowCover
     | ShowRants
     | ShowVideo
     | ShowEvents
 
-
-type PageTransition
-    = FromLeft
+type TransitionState
+    = FadeOut
+    | FromLeft
     | FromRight
-    | Neutral
-    | ClearTransition
-
+    | Reset
 
 type alias Model =
     { stories : Tape Story
     , state : AppState
-    , transition : PageTransition
+    , transition : TransitionState
     }
 
 
@@ -157,7 +154,7 @@ mapStory f m =
 
 init : Model
 init =
-    Model (Tape.single defaultStory) IntroPage Neutral
+    Model (Tape.single defaultStory) IntroPage Reset
 
 
 defaultStory : Story

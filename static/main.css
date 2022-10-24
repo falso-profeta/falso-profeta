@@ -121,9 +121,15 @@ h4, .h4 {
   100% {
     opacity: 1; } }
 
+@keyframes FadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 @keyframes Reveal {
   0% {
-    opacity: 0;
+    opacity: 0.5;
     transform: translateY(-50pt); }
   100% {
     opacity: 1;
@@ -131,33 +137,36 @@ h4, .h4 {
 
 @keyframes FromLeft {
   0% {
-    opacity: 0.5;
-    transform: translateX(-5%); }
+    opacity: 0;
+    transform: translateX(-125%); }
   100% {
     opacity: 1;
     transform: translateX(0); } }
 
 @keyframes FromRight {
   0% {
-    opacity: 0.5;
-    transform: translateX(5%); }
+    opacity: 0;
+    transform: translateX(125%); }
   100% {
     opacity: 1;
     transform: translateX(0); } }
 
 .FromLeft {
-  animation: FromLeft 300ms ease 0ms both; }
+  animation: FromLeft 250ms ease 0ms both; }
 
 .FromRight {
-  animation: FromRight 300ms ease 0ms both; }
+  animation: FromRight 250ms ease 0ms both; }
 
 .Reveal {
-  animation: Reveal 300ms linear 0ms both; }
+  animation: Reveal 200ms linear 15ms both; }
+
+.FadeOut {
+  animation: FadeOut 150ms linear 0ms both; }
 
 .ResetAnimation {
   animation: None; }
 
-.FabButton {
+.FabButton, .FabButtonExt {
   background: 0 0;
   background: #5125aa;
   cursor: pointer;
@@ -292,7 +301,7 @@ h4, .h4 {
     font-weight: 600; }
 
 .ContentBox.delay {
-  animation-delay: 1s; }
+  animation-delay: 300ms; }
 
 .ContentBox--rants {
   background-color: rgba(255, 255, 255, 0.97);

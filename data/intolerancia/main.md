@@ -4,7 +4,7 @@
     video: https://www.youtube.com/watch?time_continue=54&v=QKwJHn25gRo
     outras:
         - Nem pra procriadores [os quilombolas] servem mais <https://www.youtube.com/watch?v=yabLVrYCvdo>
-        - Eu não empregaria [mulheres e homens] com o mesmo salário <https://www.huffpostbrasil.com/2018/08/18/bolsonaro-afirmou-sim-que-nao-empregaria-mulher-com-mesmo-salario-de-homem_a_23504540/
+        - Eu não empregaria [mulheres e homens] com o mesmo salário <https://www.huffpostbrasil.com/2018/08/18/bolsonaro-afirmou-sim-que-nao-empregaria-mulher-com-mesmo-salario-de-homem_a_23504540/>
 
 
 O Senhor guarda os estrangeiros; sustém o órfão e a viúva, mas transtorna o caminho dos ímpios.

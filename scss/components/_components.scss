@@ -16,9 +16,18 @@ $border-color: $color-primary;
     }
 }
 
+@keyframes FadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes Reveal {
     0% {
-        opacity: 0;
+        opacity: 0.5;
         transform: translateY(-50pt);
     }
     100% {
@@ -29,8 +38,8 @@ $border-color: $color-primary;
 
 @keyframes FromLeft {
     0% {
-        opacity: 0.5;
-        transform: translateX(-5%);
+        opacity: 0;
+        transform: translateX(-125%);
     }
     100% {
         opacity: 1;
@@ -40,8 +49,8 @@ $border-color: $color-primary;
 
 @keyframes FromRight {
     0% {
-        opacity: 0.5;
-        transform: translateX(5%);
+        opacity: 0;
+        transform: translateX(125%);
     }
     100% {
         opacity: 1;
@@ -50,15 +59,20 @@ $border-color: $color-primary;
 }
 
 .FromLeft {
-    animation: FromLeft 300ms ease 0ms both;
+    animation: FromLeft 250ms ease 0ms both;
 }
 
 .FromRight {
-    animation: FromRight 300ms ease 0ms both;
+    animation: FromRight 250ms ease 0ms both;
 }
 
 .Reveal {
-    animation: Reveal 300ms linear 0ms both;
+    animation: Reveal 200ms linear 15ms both;
+}
+
+
+.FadeOut {
+    animation: FadeOut 150ms linear 0ms both;
 }
 
 .ResetAnimation {
@@ -68,7 +82,7 @@ $border-color: $color-primary;
 //
 // ATOMIC ELEMENTS
 //
-.FabButton {
+.FabButton, .FabButtonExt {
     background: 0 0;
     background: $color-primary;
     cursor: pointer;
@@ -225,7 +239,7 @@ $border-color: $color-primary;
 }
 
 .ContentBox.delay {
-    animation-delay: 1s;
+    animation-delay: 300ms;
 }
 
 .ContentBox--rants {

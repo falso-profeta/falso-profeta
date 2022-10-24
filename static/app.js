@@ -4625,6 +4625,9 @@ var $elm$core$Set$toList = function (_v0) {
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
+var $author$project$Update$FetchStories = function (a) {
+	return {$: 'FetchStories', a: a};
+};
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -5334,9 +5337,6 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Update$FetchStories = function (a) {
-	return {$: 'FetchStories', a: a};
-};
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6124,7 +6124,12 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $author$project$Model$IntroPage = {$: 'IntroPage'};
+var $author$project$Model$Model = F3(
+	function (stories, state, transition) {
+		return {state: state, stories: stories, transition: transition};
+	});
+var $author$project$Model$Reset = {$: 'Reset'};
 var $author$project$Model$ShowCover = {$: 'ShowCover'};
 var $author$project$Model$defaultStory = {bible: '<default>', context: 'Bolsonaro, Deputado Federal', events: _List_Nil, image: '', rants: _List_Nil, ref: '<default>', state: $author$project$Model$ShowCover, utter: '<default>', youtube: ''};
 var $author$project$Tape$Tape = F3(
@@ -6134,6 +6139,12 @@ var $author$project$Tape$Tape = F3(
 var $author$project$Tape$single = function (x) {
 	return A3($author$project$Tape$Tape, _List_Nil, x, _List_Nil);
 };
+var $author$project$Model$init = A3(
+	$author$project$Model$Model,
+	$author$project$Tape$single($author$project$Model$defaultStory),
+	$author$project$Model$IntroPage,
+	$author$project$Model$Reset);
+var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $author$project$Tape$fromList = F2(
 	function (x, lst) {
 		if (!lst.b) {
@@ -6144,17 +6155,6 @@ var $author$project$Tape$fromList = F2(
 			return A3($author$project$Tape$Tape, _List_Nil, y, ys);
 		}
 	});
-var $author$project$Model$IntroPage = {$: 'IntroPage'};
-var $author$project$Model$Model = F3(
-	function (stories, state, transition) {
-		return {state: state, stories: stories, transition: transition};
-	});
-var $author$project$Model$Neutral = {$: 'Neutral'};
-var $author$project$Model$init = A3(
-	$author$project$Model$Model,
-	$author$project$Tape$single($author$project$Model$defaultStory),
-	$author$project$Model$IntroPage,
-	$author$project$Model$Neutral);
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Tape$rewind = function (_v0) {
 	rewind:
@@ -6258,16 +6258,11 @@ var $author$project$Model$modelDecoder = function () {
 		toModel,
 		$elm$json$Json$Decode$list($author$project$Model$storyDecoder));
 }();
-var $author$project$App$getJsonRequest = $elm$http$Http$get(
-	{
-		expect: A2($elm$http$Http$expectJson, $author$project$Update$FetchStories, $author$project$Model$modelDecoder),
-		url: './static/data.json'
-	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $author$project$Update$Next = {$: 'Next'};
 var $author$project$Update$NoOp = {$: 'NoOp'};
 var $author$project$Update$Prev = {$: 'Prev'};
-var $author$project$App$key = function (keycode) {
+var $author$project$Main$key = function (keycode) {
 	switch (keycode) {
 		case 37:
 			return $author$project$Update$Prev;
@@ -6549,45 +6544,24 @@ var $elm$browser$Browser$Events$on = F3(
 			A3($elm$browser$Browser$Events$MySub, node, name, decoder));
 	});
 var $elm$browser$Browser$Events$onKeyDown = A2($elm$browser$Browser$Events$on, $elm$browser$Browser$Events$Document, 'keydown');
-var $author$project$App$subscriptions = function (_v0) {
+var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$batch(
 		_List_fromArray(
 			[
 				$elm$browser$Browser$Events$onKeyDown(
-				A2($elm$json$Json$Decode$map, $author$project$App$key, $elm$html$Html$Events$keyCode))
+				A2($elm$json$Json$Decode$map, $author$project$Main$key, $elm$html$Html$Events$keyCode))
 			]));
 };
-var $author$project$Model$FromLeft = {$: 'FromLeft'};
-var $author$project$Model$FromRight = {$: 'FromRight'};
-var $author$project$Model$ClearTransition = {$: 'ClearTransition'};
-var $author$project$Update$SetTransition = function (a) {
-	return {$: 'SetTransition', a: a};
-};
-var $elm$core$Process$sleep = _Process_sleep;
-var $author$project$Update$setTransition = function (tr) {
-	return A2(
-		$elm$core$Task$perform,
-		function (_v0) {
-			return $author$project$Update$SetTransition(tr);
-		},
-		$elm$core$Process$sleep(0));
-};
-var $author$project$Update$clearTransition = F2(
-	function (tr, m) {
-		return _Utils_Tuple2(
-			_Utils_update(
-				m,
-				{transition: $author$project$Model$ClearTransition}),
-			$author$project$Update$setTransition(tr));
-	});
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Model$FinishPage = function (a) {
 	return {$: 'FinishPage', a: a};
 };
 var $author$project$Model$ShowEvents = {$: 'ShowEvents'};
 var $author$project$Model$ShowRants = {$: 'ShowRants'};
 var $author$project$Model$ShowVideo = {$: 'ShowVideo'};
+var $author$project$Update$Transition = F3(
+	function (a, b, c) {
+		return {$: 'Transition', a: a, b: b, c: c};
+	});
 var $author$project$Model$ShowStory = {$: 'ShowStory'};
 var $author$project$Tape$popRight = function (_v0) {
 	var left = _v0.a;
@@ -6721,8 +6695,21 @@ var $author$project$Update$back = function (m) {
 				m,
 				{
 					state: $author$project$Model$ShowStory,
-					stories: $author$project$Update$resetStoryState(m.stories)
+					stories: $author$project$Tape$rewind(
+						$author$project$Update$resetStoryState(m.stories))
 				});
+	}
+};
+var $author$project$Update$duration = function (step) {
+	switch (step.$) {
+		case 'FadeOut':
+			return 150;
+		case 'Reset':
+			return 1;
+		case 'FromLeft':
+			return 250;
+		default:
+			return 250;
 	}
 };
 var $author$project$Model$mapStory = F2(
@@ -6733,6 +6720,9 @@ var $author$project$Model$mapStory = F2(
 				stories: A2($author$project$Tape$mapHead, f, m.stories)
 			});
 	});
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$core$Process$sleep = _Process_sleep;
 var $author$project$Update$toggleState = F3(
 	function (a, b, m) {
 		var state = _Utils_eq(m.state, a) ? b : (_Utils_eq(m.state, b) ? a : m.state);
@@ -6748,76 +6738,123 @@ var $author$project$Update$toggleStoryState = F3(
 			st,
 			{state: b});
 	});
-var $author$project$Update$updateModel = F2(
+var $author$project$Update$update = F2(
 	function (msg, m) {
 		switch (msg.$) {
 			case 'Next':
-				return $author$project$Update$advance(m);
+				return _Utils_Tuple2(
+					$author$project$Update$advance(m),
+					$elm$core$Platform$Cmd$none);
 			case 'Prev':
-				return $author$project$Update$back(m);
+				return _Utils_Tuple2(
+					$author$project$Update$back(m),
+					$elm$core$Platform$Cmd$none);
 			case 'ToggleRants':
-				return A2(
-					$author$project$Model$mapStory,
-					A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowRants),
-					m);
+				return _Utils_Tuple2(
+					A2(
+						$author$project$Model$mapStory,
+						A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowRants),
+						m),
+					$elm$core$Platform$Cmd$none);
 			case 'ToggleVideo':
-				return A2(
-					$author$project$Model$mapStory,
-					A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowVideo),
-					m);
+				return _Utils_Tuple2(
+					A2(
+						$author$project$Model$mapStory,
+						A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowVideo),
+						m),
+					$elm$core$Platform$Cmd$none);
 			case 'ToggleEvents':
-				return A2(
-					$author$project$Model$mapStory,
-					A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowEvents),
-					m);
+				return _Utils_Tuple2(
+					A2(
+						$author$project$Model$mapStory,
+						A2($author$project$Update$toggleStoryState, $author$project$Model$ShowCover, $author$project$Model$ShowEvents),
+						m),
+					$elm$core$Platform$Cmd$none);
 			case 'ToggleLinks':
-				return A3(
-					$author$project$Update$toggleState,
-					$author$project$Model$FinishPage(true),
-					$author$project$Model$FinishPage(false),
-					m);
+				return _Utils_Tuple2(
+					A3(
+						$author$project$Update$toggleState,
+						$author$project$Model$FinishPage(true),
+						$author$project$Model$FinishPage(false),
+						m),
+					$elm$core$Platform$Cmd$none);
 			case 'FetchStories':
 				if (msg.a.$ === 'Ok') {
 					var model = msg.a.a;
-					return _Utils_update(
-						m,
-						{stories: model.stories});
+					return _Utils_Tuple2(
+						_Utils_update(
+							m,
+							{stories: model.stories}),
+						$elm$core$Platform$Cmd$none);
 				} else {
 					var e = msg.a.a;
-					return m;
+					return _Utils_Tuple2(m, $elm$core$Platform$Cmd$none);
 				}
-			case 'SetTransition':
-				var tr = msg.a;
-				return _Utils_update(
-					m,
-					{transition: tr});
 			case 'Restart':
-				return _Utils_update(
-					m,
-					{state: $author$project$Model$IntroPage});
+				return _Utils_Tuple2(
+					_Utils_update(
+						m,
+						{state: $author$project$Model$IntroPage}),
+					$elm$core$Platform$Cmd$none);
+			case 'Transition':
+				var pre = msg.a;
+				var post = msg.b;
+				var nextMsg = msg.c;
+				var _v1 = _Utils_Tuple2(pre, post);
+				if (_v1.a.$ === 'Nothing') {
+					if (_v1.b.$ === 'Nothing') {
+						var _v2 = _v1.a;
+						var _v3 = _v1.b;
+						return _Utils_Tuple2(m, $elm$core$Platform$Cmd$none);
+					} else {
+						var _v4 = _v1.a;
+						var step = _v1.b.a;
+						var task = A2(
+							$elm$core$Task$perform,
+							function (_v6) {
+								return A3($author$project$Update$Transition, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing, nextMsg);
+							},
+							$elm$core$Process$sleep(
+								$author$project$Update$duration(step)));
+						var _v5 = A2($author$project$Update$update, nextMsg, m);
+						var _new = _v5.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								_new,
+								{transition: step}),
+							task);
+					}
+				} else {
+					var step = _v1.a.a;
+					var task = A2(
+						$elm$core$Task$perform,
+						function (_v7) {
+							return A3($author$project$Update$Transition, $elm$core$Maybe$Nothing, post, nextMsg);
+						},
+						$elm$core$Process$sleep(
+							$author$project$Update$duration(step)));
+					return _Utils_Tuple2(
+						_Utils_update(
+							m,
+							{transition: step}),
+						task);
+				}
 			default:
-				return m;
+				return _Utils_Tuple2(m, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Update$update = F2(
-	function (msg, m) {
-		var _new = A2($author$project$Update$updateModel, msg, m);
-		switch (msg.$) {
-			case 'Next':
-				return A2($author$project$Update$clearTransition, $author$project$Model$FromLeft, _new);
-			case 'Prev':
-				return A2($author$project$Update$clearTransition, $author$project$Model$FromRight, _new);
-			default:
-				return _Utils_Tuple2(_new, $elm$core$Platform$Cmd$none);
-		}
-	});
-var $author$project$App$mainWrapper = function (view) {
+var $author$project$Main$mainWrapper = function (view) {
+	var getJsonRequest = $elm$http$Http$get(
+		{
+			expect: A2($elm$http$Http$expectJson, $author$project$Update$FetchStories, $author$project$Model$modelDecoder),
+			url: './static/data.json'
+		});
 	return $elm$browser$Browser$element(
 		{
 			init: function (_v0) {
-				return _Utils_Tuple2($author$project$Model$init, $author$project$App$getJsonRequest);
+				return _Utils_Tuple2($author$project$Model$init, getJsonRequest);
 			},
-			subscriptions: $author$project$App$subscriptions,
+			subscriptions: $author$project$Main$subscriptions,
 			update: $author$project$Update$update,
 			view: view
 		});
@@ -7248,22 +7285,22 @@ var $author$project$View$viewIntroPage = A4(
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('A política brasileira está cheia de falsos profetas.')
+						$elm$html$Html$text('A política é cheia de falsos profetas.')
 					])),
 				A2(
 				$elm$html$Html$p,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Eles se dizem cristãos, mas na verdade propagam a intolerância. O presidente '),
+						$elm$html$Html$text('Será que '),
 						A2(
 						$elm$html$Html$strong,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Jair Messias Bolsonaro')
+								$elm$html$Html$text('Bolsonaro')
 							])),
-						$elm$html$Html$text(' é um deles.')
+						$elm$html$Html$text(' é um deles? Ele diz cristão, mas vamos ver suas ações.')
 					])),
 				A2(
 				$elm$html$Html$a,
@@ -7274,7 +7311,7 @@ var $author$project$View$viewIntroPage = A4(
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('saiba mais')
+						$elm$html$Html$text('continue...')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -7550,7 +7587,45 @@ var $author$project$View$viewEvents = function (st) {
 		},
 		st.events);
 };
+var $author$project$Model$FromLeft = {$: 'FromLeft'};
+var $author$project$Model$FromRight = {$: 'FromRight'};
 var $author$project$Update$ToggleRants = {$: 'ToggleRants'};
+var $author$project$Ui$fabText = F2(
+	function (msg, txt) {
+		return A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Events$onClick(msg),
+					$elm$html$Html$Attributes$class('FabButton'),
+					A2($elm$html$Html$Attributes$style, 'border-radius', '20px'),
+					A2($elm$html$Html$Attributes$style, 'padding', '0 0.5em'),
+					A2($elm$html$Html$Attributes$style, 'width', 'inherit')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							A2($elm$html$Html$Attributes$style, 'font-size', '70%'),
+							A2($elm$html$Html$Attributes$style, 'padding', '0.5em')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(txt)
+						]))
+				]));
+	});
+var $author$project$Model$FadeOut = {$: 'FadeOut'};
+var $author$project$View$fade = F2(
+	function (cmd, cls) {
+		return A3(
+			$author$project$Update$Transition,
+			$elm$core$Maybe$Just($author$project$Model$FadeOut),
+			$elm$core$Maybe$Just(cls),
+			cmd);
+	});
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
 		return true;
@@ -7613,6 +7688,7 @@ var $author$project$View$viewShowMore = function (st) {
 			return $elm$html$Html$Attributes$class('ContentBox');
 		}
 	}();
+	var fabMiddle = _Utils_eq(st.state, $author$project$Model$ShowRants) ? A2($author$project$Ui$fab, $author$project$Update$ToggleRants, 'fas fa-minus') : A2($author$project$Ui$fabText, $author$project$Update$ToggleRants, 'saiba mais');
 	var backCover = A2(
 		$elm$html$Html$a,
 		_List_fromArray(
@@ -7645,7 +7721,7 @@ var $author$project$View$viewShowMore = function (st) {
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('consequências '),
+					$elm$html$Html$text('notícias '),
 					A2(
 					$elm$html$Html$i,
 					_List_fromArray(
@@ -7661,16 +7737,6 @@ var $author$project$View$viewShowMore = function (st) {
 			[showMoreClass]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$p,
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'color', '#000b')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('o que diz Jair...')
-					])),
 				A2(
 				$elm$html$Html$div,
 				_List_Nil,
@@ -7721,12 +7787,15 @@ var $author$project$View$viewShowMore = function (st) {
 					]),
 				_List_fromArray(
 					[
-						A2($author$project$Ui$fab, $author$project$Update$Prev, 'fas fa-chevron-left'),
 						A2(
 						$author$project$Ui$fab,
-						$author$project$Update$ToggleRants,
-						_Utils_eq(st.state, $author$project$Model$ShowRants) ? 'fas fa-minus' : 'fas fa-plus'),
-						A2($author$project$Ui$fab, $author$project$Update$Next, 'fas fa-chevron-right')
+						A2($author$project$View$fade, $author$project$Update$Prev, $author$project$Model$FromRight),
+						'fas fa-chevron-left'),
+						fabMiddle,
+						A2(
+						$author$project$Ui$fab,
+						A2($author$project$View$fade, $author$project$Update$Next, $author$project$Model$FromLeft),
+						'fas fa-chevron-right')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -7765,8 +7834,8 @@ var $author$project$View$viewWrapper = F2(
 					return 'FromLeft';
 				case 'FromRight':
 					return 'FromRight';
-				case 'Neutral':
-					return 'Reveal';
+				case 'FadeOut':
+					return 'FadeOut';
 				default:
 					return 'ResetAnimation';
 			}
@@ -7795,8 +7864,8 @@ var $author$project$View$viewWrapper = F2(
 				_List_fromArray(
 					[content])));
 	});
-var $author$project$AppProduction$main = $author$project$App$mainWrapper(
+var $author$project$App$main = $author$project$Main$mainWrapper(
 	function (m) {
 		return A2($author$project$View$viewWrapper, _List_Nil, m);
 	});
-_Platform_export({'AppProduction':{'init':$author$project$AppProduction$main($elm$json$Json$Decode$value)(0)}});}(this));
+_Platform_export({'App':{'init':$author$project$App$main($elm$json$Json$Decode$value)(0)}});}(this));

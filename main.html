@@ -20,6 +20,9 @@
 <!-- Removes splash and starts elm app. -->
 <script type="text/javascript">
 	Elm.App.init({ node: document.getElementById("app") });
+	if (window.location.hostname === "localhost") {
+		document.designMode = "on";
+	}
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

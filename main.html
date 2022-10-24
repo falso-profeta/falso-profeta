@@ -9,6 +9,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/static/main.css">
 	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
+	<script>
+		(async () => {
+			if ("serviceWorker" in navigator) {
+				try {
+				const registration = await navigator.serviceWorker.register("./sw.js", {
+					scope: "/",
+				});
+				if (registration.installing) {
+					console.log("Service worker installing");
+				} else if (registration.waiting) {
+					console.log("Service worker installed");
+				} else if (registration.active) {
+					console.log("Service worker active");
+				}
+				} catch (error) {
+				console.error(`Registration failed with ${error}`);
+				}
+			}
+		})();
+	</script>
 	<script type="text/javascript" src="/static/app.min.js"></script>
 </head>
 

@@ -5,6 +5,7 @@
     outras:
         - Nem pra procriadores [os quilombolas] servem mais <https://www.youtube.com/watch?v=yabLVrYCvdo>
         - Eu não empregaria [mulheres e homens] com o mesmo salário <https://www.huffpostbrasil.com/2018/08/18/bolsonaro-afirmou-sim-que-nao-empregaria-mulher-com-mesmo-salario-de-homem_a_23504540/>
+        - Se não se cuidou, o problema é dele (sobre portadores do vírus HIV) <https://www.youtube.com/watch?v=ff80YSpuAsE>
 
 
 O Senhor guarda os estrangeiros; sustém o órfão e a viúva, mas transtorna o caminho dos ímpios.

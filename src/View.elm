@@ -62,9 +62,8 @@ viewIntroPage =
             [ h1 []
                 [ text "A política é cheia de falsos profetas." ]
             , p []
-                [ text "Será que "
-                , strong [] [ text "Bolsonaro" ]
-                , text " é um deles? Ele diz cristão, mas vamos ver suas ações."
+                [ strong [] [ text "Bolsonaro" ]
+                , text " se diz cristão, mas será que ele é um deles? Vamos julgar pelas suas ações."
                 ]
             , a
                 [ href "#", onClick Next ]

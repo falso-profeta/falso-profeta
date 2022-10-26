@@ -1,8 +1,7 @@
 # Vamos fuzilar a petralhada (Jair Bolsonaro, em comício no Acre)
 
-    capa: /static/pomba-laranja.jpg
+    pecado: ira
     video: https://www.youtube.com/watch?time_continue=53&v=FYErb6oriiU
-    citar: Jair Messias Bolsonaro, durante comício em Rio Branco
     outras:
         - Quanto mais se matar, melhor <https://www.youtube.com/watch?v=Ii-Bo9HPAeE>
         - Violência se combate com violência <https://www.youtube.com/watch?v=o8ECr0eDEGo>
@@ -11,6 +10,13 @@
 Aí Jesus disse: "Guarde a sua espada, pois quem usa a espada será morto por uma espada".
 - Mateus 26:52
 
+
+## Bolsonaro tenta reativar máquina de ódio, mentiras e golpismo para 2022 (Folha de São Paulo)
+
+    url: https://www1.folha.uol.com.br/colunas/bruno-boghossian/2021/12/bolsonaro-tenta-reativar-maquina-de-odio-mentiras-e-golpismo-para-2022.shtml
+    imagem: https://f.i.uol.com.br/fotografia/2021/12/09/163908173361b267052c5f9_1639081733_3x2_lg.jpg
+
+Bolsonaro alimenta máquina de fake news e ódio conhecida como Gabinete do ódio.
 
 ## Mestre de capoeira é morto por eleitor de Bolsonaro após declarar voto no PT (BBC Brasil)
 

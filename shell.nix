@@ -27,6 +27,8 @@ let
     toolz
     pyyaml
     rich
+    typer
+    aiohttp
   ];
 in
 pkgs.mkShell {

@@ -1,6 +1,5 @@
 # Eu não corro esse risco por que meus filhos foram muito bem educados e não viveram em ambiente como lamentavelmente é o seu (Bolsonaro, respondendo o que faria se seu filho se apaixonasse por uma mulher negra)
 
-    capa: /static/sinai.jpg
     video: https://www.youtube.com/watch?v=B-0zoMTdqqk&t=1s
     outras:
         - Sou favorável à tortura <https://www.youtube.com/watch?time_continue=29&v=-fMdCwlwg8E>

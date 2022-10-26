@@ -7292,7 +7292,6 @@ var $author$project$View$viewIntroPage = A4(
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Será que '),
 						A2(
 						$elm$html$Html$strong,
 						_List_Nil,
@@ -7300,7 +7299,7 @@ var $author$project$View$viewIntroPage = A4(
 							[
 								$elm$html$Html$text('Bolsonaro')
 							])),
-						$elm$html$Html$text(' é um deles? Ele diz cristão, mas vamos ver suas ações.')
+						$elm$html$Html$text(' se diz cristão, mas será que ele é um deles? Vamos julgar pelas suas ações.')
 					])),
 				A2(
 				$elm$html$Html$a,

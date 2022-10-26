@@ -2,6 +2,7 @@
 
     capa: /static/mao.jpg
     video: https://www.youtube.com/watch?time_continue=19&v=dvaYrw1hkjg
+    outras:
         
 Serpentes, raça de víboras! Como escapareis da condenação do inferno?
 -Mateus 23:33

@@ -2,7 +2,6 @@
 
     video: https://www.youtube.com/watch?v=4z6znfxKVzk
     outras:
-        - Se não se cuidou, o problema é dele <https://www.youtube.com/watch?v=ff80YSpuAsE>
         - A PM devia ter matado 1.000 e não 111 presos (sobre o massacre do Carandirú) <http://acervo.folha.com.br/fsp/1997/10/03/264/>
 
 A pessoa boa tira o bem do seu depósito de coisas boas, e a pessoa má tira o mau do seu depósito de coisas más.

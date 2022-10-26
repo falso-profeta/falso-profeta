@@ -85,18 +85,21 @@ attrsFromQuote st =
 
 youtubeIframe : String -> Url -> Html msg
 youtubeIframe cls url =
-    iframe
-        [ width 500
-        , height 375
-        , attribute "max-width" "100%"
-        , class cls
-        , src url
-        , property "frameborder" (Json.Encode.string "0")
-        , property "allowfullscreen" (Json.Encode.string "true")
-        , property "allow" (Json.Encode.string "autoplay; encrypted-media")
-        , attribute "allowfullscreen" "true"
-        ]
-        []
+    let 
+        normalizedUrl = url -- String.replace "watch?" "embed?" url
+    in
+        iframe
+            [ width 500
+            , height 375
+            , attribute "max-width" "100%"
+            , class cls
+            , src normalizedUrl
+            , property "frameborder" (Json.Encode.string "0")
+            , property "allowfullscreen" (Json.Encode.string "true")
+            , property "allow" (Json.Encode.string "autoplay; encrypted-media")
+            , attribute "allowfullscreen" "true"
+            ]
+            []
 
 
 

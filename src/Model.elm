@@ -16,6 +16,7 @@ module Model exposing
     )
 
 import Json.Decode as D
+import Json.Decode.Pipeline exposing (required, hardcoded)
 import Tape exposing (..)
 
 
@@ -58,13 +59,8 @@ type alias Model =
 modelDecoder : D.Decoder Model
 modelDecoder =
     let
-        toModel sts =
-            D.succeed
-                { init
-                    | stories =
-                        Tape.rewind
-                            (Tape.fromList defaultStory sts)
-                }
+        toModel sts = D.succeed { init | stories = tape sts }
+        tape sts = Tape.rewind (Tape.fromList defaultStory sts)
     in
     D.list storyDecoder
         |> D.andThen toModel
@@ -72,6 +68,7 @@ modelDecoder =
 
 type alias Story =
     { state : StoryState
+    , name : String
     , bible : String
     , ref : String
     , utter : String
@@ -85,15 +82,17 @@ type alias Story =
 
 storyDecoder : D.Decoder Story
 storyDecoder =
-    D.map8 (Story ShowCover)
-        (D.field "bible" D.string)
-        (D.field "ref" D.string)
-        (D.field "utter" D.string)
-        (D.field "context" D.string)
-        (D.field "youtube" D.string)
-        (D.field "image" D.string)
-        (D.field "events" (D.list eventDecoder))
-        (D.field "rants" (D.list rantDecoder))
+    D.succeed Story
+        |> hardcoded ShowCover
+        |> required "name" D.string
+        |> required "bible" D.string
+        |> required "ref" D.string
+        |> required "utter" D.string
+        |> required "context" D.string
+        |> required "youtube" D.string
+        |> required "image" D.string
+        |> required "events" (D.list eventDecoder)
+        |> required "rants" (D.list rantDecoder)
 
 
 type alias Event =
@@ -160,6 +159,7 @@ init =
 defaultStory : Story
 defaultStory =
     { bible = "<default>"
+    , name = "<default>"
     , ref = "<default>"
     , utter = "<default>"
     , context = "Bolsonaro, Deputado Federal"

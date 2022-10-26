@@ -69,7 +69,7 @@ def parse_text(st: str) -> dict:
 
     # Metadata
     meta = safe_load("\n".join(paragraphs.popleft()))
-    data["youtube"] = meta["video"] or ""
+    data["youtube"] = meta["video"].replace('watch?', 'embed?') or ""
 
     # Rants
     data["rants"] = rants = []

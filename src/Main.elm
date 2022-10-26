@@ -24,11 +24,13 @@ mainWrapper view =
                 , expect = Http.expectJson FetchStories modelDecoder
                 }
     in
-    Browser.element
-        { init = \_ -> ( Model.init, getJsonRequest )
+    Browser.application
+        { init = \_ _ _ -> ( Model.init, getJsonRequest )
         , update = Update.update
         , subscriptions = subscriptions
-        , view = view
+        , onUrlRequest = \_ -> Restart
+        , onUrlChange = \_ -> Restart
+        , view = \m -> Browser.Document "Bolsonaro, o falso profeta" [ view m ]
         }
 
 

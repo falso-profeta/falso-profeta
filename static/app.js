@@ -4625,9 +4625,14 @@ var $elm$core$Set$toList = function (_v0) {
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
+var $elm$browser$Browser$Document = F2(
+	function (title, body) {
+		return {body: body, title: title};
+	});
 var $author$project$Update$FetchStories = function (a) {
 	return {$: 'FetchStories', a: a};
 };
+var $author$project$Update$Restart = {$: 'Restart'};
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -5336,7 +5341,7 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$element = _Browser_element;
+var $elm$browser$Browser$application = _Browser_application;
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6131,7 +6136,7 @@ var $author$project$Model$Model = F3(
 	});
 var $author$project$Model$Reset = {$: 'Reset'};
 var $author$project$Model$ShowCover = {$: 'ShowCover'};
-var $author$project$Model$defaultStory = {bible: '<default>', context: 'Bolsonaro, Deputado Federal', events: _List_Nil, image: '', rants: _List_Nil, ref: '<default>', state: $author$project$Model$ShowCover, utter: '<default>', youtube: ''};
+var $author$project$Model$defaultStory = {bible: '<default>', context: 'Bolsonaro, Deputado Federal', events: _List_Nil, image: '', name: '<default>', rants: _List_Nil, ref: '<default>', state: $author$project$Model$ShowCover, utter: '<default>', youtube: ''};
 var $author$project$Tape$Tape = F3(
 	function (a, b, c) {
 		return {$: 'Tape', a: a, b: b, c: c};
@@ -6177,10 +6182,27 @@ var $author$project$Tape$rewind = function (_v0) {
 		}
 	}
 };
-var $author$project$Model$Story = F9(
-	function (state, bible, ref, utter, context, youtube, image, events, rants) {
-		return {bible: bible, context: context, events: events, image: image, rants: rants, ref: ref, state: state, utter: utter, youtube: youtube};
-	});
+var $author$project$Model$Story = function (state) {
+	return function (name) {
+		return function (bible) {
+			return function (ref) {
+				return function (utter) {
+					return function (context) {
+						return function (youtube) {
+							return function (image) {
+								return function (events) {
+									return function (rants) {
+										return {bible: bible, context: context, events: events, image: image, name: name, rants: rants, ref: ref, state: state, utter: utter, youtube: youtube};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var $author$project$Model$Event = F4(
 	function (title, text, source, image) {
 		return {image: image, source: source, text: text, title: title};
@@ -6204,7 +6226,8 @@ var $author$project$Model$eventDecoder = A5(
 	A2($elm$json$Json$Decode$field, 'text', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'source', $author$project$Model$sourceDecoder),
 	A2($elm$json$Json$Decode$field, 'image', $elm$json$Json$Decode$string));
-var $elm$json$Json$Decode$map8 = _Json_map8;
+var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom = $elm$json$Json$Decode$map2($elm$core$Basics$apR);
+var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$hardcoded = A2($elm$core$Basics$composeR, $elm$json$Json$Decode$succeed, $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom);
 var $author$project$Model$Rant = F2(
 	function (text, source) {
 		return {source: source, text: text};
@@ -6226,31 +6249,64 @@ var $author$project$Model$rantDecoder = A3(
 		$elm$json$Json$Decode$field,
 		'source',
 		$elm$json$Json$Decode$maybe($author$project$Model$sourceDecoder)));
-var $author$project$Model$storyDecoder = A9(
-	$elm$json$Json$Decode$map8,
-	$author$project$Model$Story($author$project$Model$ShowCover),
-	A2($elm$json$Json$Decode$field, 'bible', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'ref', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'utter', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'context', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'youtube', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'image', $elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$field,
+var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
+	function (key, valDecoder, decoder) {
+		return A2(
+			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom,
+			A2($elm$json$Json$Decode$field, key, valDecoder),
+			decoder);
+	});
+var $author$project$Model$storyDecoder = A3(
+	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'rants',
+	$elm$json$Json$Decode$list($author$project$Model$rantDecoder),
+	A3(
+		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 		'events',
-		$elm$json$Json$Decode$list($author$project$Model$eventDecoder)),
-	A2(
-		$elm$json$Json$Decode$field,
-		'rants',
-		$elm$json$Json$Decode$list($author$project$Model$rantDecoder)));
+		$elm$json$Json$Decode$list($author$project$Model$eventDecoder),
+		A3(
+			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+			'image',
+			$elm$json$Json$Decode$string,
+			A3(
+				$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+				'youtube',
+				$elm$json$Json$Decode$string,
+				A3(
+					$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+					'context',
+					$elm$json$Json$Decode$string,
+					A3(
+						$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+						'utter',
+						$elm$json$Json$Decode$string,
+						A3(
+							$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+							'ref',
+							$elm$json$Json$Decode$string,
+							A3(
+								$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+								'bible',
+								$elm$json$Json$Decode$string,
+								A3(
+									$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+									'name',
+									$elm$json$Json$Decode$string,
+									A2(
+										$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$hardcoded,
+										$author$project$Model$ShowCover,
+										$elm$json$Json$Decode$succeed($author$project$Model$Story)))))))))));
 var $author$project$Model$modelDecoder = function () {
+	var tape = function (sts) {
+		return $author$project$Tape$rewind(
+			A2($author$project$Tape$fromList, $author$project$Model$defaultStory, sts));
+	};
 	var toModel = function (sts) {
 		return $elm$json$Json$Decode$succeed(
 			_Utils_update(
 				$author$project$Model$init,
 				{
-					stories: $author$project$Tape$rewind(
-						A2($author$project$Tape$fromList, $author$project$Model$defaultStory, sts))
+					stories: tape(sts)
 				}));
 	};
 	return A2(
@@ -6849,14 +6905,29 @@ var $author$project$Main$mainWrapper = function (view) {
 			expect: A2($elm$http$Http$expectJson, $author$project$Update$FetchStories, $author$project$Model$modelDecoder),
 			url: './static/data.json'
 		});
-	return $elm$browser$Browser$element(
+	return $elm$browser$Browser$application(
 		{
-			init: function (_v0) {
-				return _Utils_Tuple2($author$project$Model$init, getJsonRequest);
+			init: F3(
+				function (_v0, _v1, _v2) {
+					return _Utils_Tuple2($author$project$Model$init, getJsonRequest);
+				}),
+			onUrlChange: function (_v3) {
+				return $author$project$Update$Restart;
+			},
+			onUrlRequest: function (_v4) {
+				return $author$project$Update$Restart;
 			},
 			subscriptions: $author$project$Main$subscriptions,
 			update: $author$project$Update$update,
-			view: view
+			view: function (m) {
+				return A2(
+					$elm$browser$Browser$Document,
+					'Bolsonaro, o falso profeta',
+					_List_fromArray(
+						[
+							view(m)
+						]));
+			}
 		});
 };
 var $elm$json$Json$Decode$value = _Json_decodeValue;
@@ -6881,7 +6952,6 @@ var $author$project$Model$Quote = F2(
 	function (a, b) {
 		return {$: 'Quote', a: a, b: b};
 	});
-var $author$project$Update$Restart = {$: 'Restart'};
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $author$project$Ui$asUrl = function (st) {
 	return 'url(\"' + (st + '\")');
@@ -7361,6 +7431,7 @@ var $elm$html$Html$Attributes$width = function (n) {
 };
 var $author$project$Ui$youtubeIframe = F2(
 	function (cls, url) {
+		var normalizedUrl = url;
 		return A2(
 			$elm$html$Html$iframe,
 			_List_fromArray(
@@ -7369,7 +7440,7 @@ var $author$project$Ui$youtubeIframe = F2(
 					$elm$html$Html$Attributes$height(375),
 					A2($elm$html$Html$Attributes$attribute, 'max-width', '100%'),
 					$elm$html$Html$Attributes$class(cls),
-					$elm$html$Html$Attributes$src(url),
+					$elm$html$Html$Attributes$src(normalizedUrl),
 					A2(
 					$elm$html$Html$Attributes$property,
 					'frameborder',

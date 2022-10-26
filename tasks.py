@@ -12,10 +12,19 @@ def build(ctx):
 
 @task
 def start(ctx):
-    ctx.run("elm reactor")
+    ctx.run("elm-live src/Main.elm -Hv -s main.html")
 
 
 @task(build)
 def site(ctx):
     ctx.run("python -m http.server 8001")
+
+
+
+@task(build)
+def publish(ctx, message="Update site"):
+    ctx.run("git add .")
+    ctx.run("git status", pty=True)
+    ctx.run(f'git commit -m "{message}"')
+    ctx.run('git push')
 

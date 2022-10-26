@@ -61,6 +61,37 @@ goLeft (Tape left x right) =
             Tape ys y (x :: right)
 
 
+searchRight : (a -> Bool) -> Tape a -> Maybe (Tape a)
+searchRight pred (Tape left x right) =
+    if pred x then
+        Just (Tape left x right) 
+    else 
+        case right of
+            [] ->
+                Nothing
+            y :: ys ->
+                searchRight pred (Tape (x::left) y ys)            
+ 
+
+searchLeft : (a -> Bool) -> Tape a -> Maybe (Tape a)
+searchLeft pred (Tape left x right) =
+    if pred x then
+        Just (Tape left x right) 
+    else 
+        case left of
+            [] ->
+                Nothing
+            y :: ys ->
+                searchRight pred (Tape ys y (x::right))     
+
+
+search : (a -> Bool) -> Tape a -> Maybe (Tape a)
+search pred tape =
+    case searchRight pred tape of
+        Just t -> Just t
+        Nothing -> searchLeft pred tape
+
+
 hasRight : Tape a -> Bool
 hasRight (Tape _ _ right) =
     not (List.isEmpty right)

@@ -11,7 +11,7 @@ FILES = [
     'economia',
     'racismo',
     'intolerancia',
-    'preguica',
+    # 'preguica',
     'imigrantes',
     'lgbt',
     'ditadura',

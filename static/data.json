@@ -351,35 +351,6 @@
     "image": "/static/bg-intolerancia.jpg"
   },
   {
-    "utter": "???",
-    "context": "",
-    "youtube": "???",
-    "rants": [],
-    "ref": "Salom\u00e3o 10:4",
-    "bible": "A m\u00e3o pregui\u00e7osa empobrece, o bra\u00e7o diligente enriquece.",
-    "events": [
-      {
-        "title": "Bolsonaro \u00e9 o presidente que menos aprova projetos no Congresso, aponta estudo (Cultura UOL)",
-        "text": "Jair Bolsonaro (PL) \u00e9 o presidente com pior desempenho na aprova\u00e7\u00e3o dos projetos que envia ao Legislativo desde a redemocratiza\u00e7\u00e3o, segundo dados do Observat\u00f3rio do Legislativo Brasileiro (OLB), projeto mantido por pesquisadores do Instituto de Estudos Sociais e Pol\u00edticos (Iesp), que \u00e9 vinculado \u00e0 Universidade do Estado do Rio de Janeiro (Uerj).",
-        "image": "https://cultura.uol.com.br/upload/tvcultura/noticias/20211206085135_design-sem-nome-3-.png",
-        "source": {
-          "name": "cultura.uol.com.br",
-          "url": "https://cultura.uol.com.br/noticias/44695_bolsonaro-e-o-presidente-que-menos-aprova-projetos-no-congresso-aponta-estudo.html"
-        }
-      },
-      {
-        "title": "Bolsonaro desdenha da CPI e diz n\u00e3o ter culpa de nada (Jornal Nexo)",
-        "text": "Presidente foge das suas responsabilidades de gest\u00e3o da pandemia, atribu\u00edndo-as aos prefeitos e governadores.",
-        "image": "https://www.nexojornal.com.br/incoming/imagens/Bolsonaro-aponta/alternates/LANDSCAPE_640/Bolsonaro%20aponta%20",
-        "source": {
-          "name": "nexojornal.com.br",
-          "url": "https://www.nexojornal.com.br/extra/2021/10/20/Bolsonaro-desdenha-da-CPI-e-diz-n%C3%A3o-ter-culpa-de-nada"
-        }
-      }
-    ],
-    "image": "/static/bg-preguica.jpg"
-  },
-  {
     "utter": "Senegaleses, Haitianos, Iranos, Bolivianos, tudo que \u00e9 esc\u00f3ria do mundo, n\u00e9, e agora t\u00e1 chegando os S\u00edrios tamb\u00e9m aqui.",
     "context": "Bolsonaro, em entrevista ao jornal Op\u00e7\u00e3o",
     "youtube": "https://www.youtube.com/watch?v=-2JaiUcoUfU",

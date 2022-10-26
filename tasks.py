@@ -17,5 +17,5 @@ def start(ctx):
 
 @task(build)
 def site(ctx):
-    ctx.run("python -m http 8000")
+    ctx.run("python -m http.server 8001")
 

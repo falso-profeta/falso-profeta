@@ -125,6 +125,7 @@ def main():
             src = fd.read()
             try:
                 data = parse_text(src)
+                data['name'] = path
                 data["image"] = f"/static/bg-{path}.jpg"
             except Exception as exc:
                 print(f'\nerror({path}): {exc}\n\n', file=sys.stderr)

@@ -66,6 +66,7 @@
         }
       }
     ],
+    "name": "ira",
     "image": "/static/bg-ira.jpg"
   },
   {
@@ -128,6 +129,7 @@
         }
       }
     ],
+    "name": "avareza",
     "image": "/static/bg-avareza.jpg"
   },
   {
@@ -179,6 +181,7 @@
         }
       }
     ],
+    "name": "luxuria",
     "image": "/static/bg-luxuria.jpg"
   },
   {
@@ -208,6 +211,7 @@
         }
       }
     ],
+    "name": "gula",
     "image": "/static/bg-gula.jpg"
   },
   {
@@ -237,6 +241,7 @@
         }
       }
     ],
+    "name": "economia",
     "image": "/static/bg-economia.jpg"
   },
   {
@@ -288,6 +293,7 @@
         }
       }
     ],
+    "name": "racismo",
     "image": "/static/bg-racismo.jpg"
   },
   {
@@ -348,6 +354,7 @@
         }
       }
     ],
+    "name": "intolerancia",
     "image": "/static/bg-intolerancia.jpg"
   },
   {
@@ -404,6 +411,7 @@
         }
       }
     ],
+    "name": "imigrantes",
     "image": "/static/bg-imigrantes.jpg"
   },
   {
@@ -457,6 +465,7 @@
         }
       }
     ],
+    "name": "lgbt",
     "image": "/static/bg-lgbt.jpg"
   },
   {
@@ -503,6 +512,7 @@
         }
       }
     ],
+    "name": "ditadura",
     "image": "/static/bg-ditadura.jpg"
   },
   {
@@ -549,6 +559,7 @@
         }
       }
     ],
+    "name": "presos",
     "image": "/static/bg-presos.jpg"
   }
 ]

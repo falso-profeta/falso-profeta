@@ -24,6 +24,17 @@ def clean_ws(xs: deque[str]) -> deque[str]:
     return xs
 
 
+def update_sw(files):
+    lines = (f'    {{ url: {file}, revision: null }}, ' for file in files)
+    src = '\n'.join(lines)
+    
+    with open(PATH.parent / 'sw-template.js') as fd:
+        src = fd.read().replace('$URLS', src)
+    
+    with open(PATH.parent / 'sw.js', 'w') as fd:
+        fd.write(src)
+
+
 def parse_text(st: str) -> dict:
     """
     Convert Markdown data to JSON
@@ -107,6 +118,8 @@ def parse_source(source: str):
 
 def main():
     result = []
+    bg_files = []
+
     for path in FILES:
         with open(PATH / path / "main.md") as fd:
             src = fd.read()
@@ -123,7 +136,10 @@ def main():
             with open(PATH.parent / "static" / f"bg-{path}.jpg", "wb") as dest:
                 dest.write(source.read())
 
+        bg_files.append(f'"./static/bg-{path}.jpg"')
+
     print(json.dumps(result, indent=2))
+    update_sw(bg_files)
 
 
 if __name__ == "__main__":

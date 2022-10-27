@@ -7839,8 +7839,6 @@ var $author$project$View$viewShowMore = function (st) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$Ui$icon('fab fa-youtube'),
-						$elm$html$Html$text(' '),
 						A2(
 						$elm$html$Html$a,
 						_List_fromArray(
@@ -7850,7 +7848,8 @@ var $author$project$View$viewShowMore = function (st) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('veja o vídeo')
+								$author$project$Ui$icon('fab black fa-youtube'),
+								$elm$html$Html$text(' veja o vídeo')
 							]))
 					])),
 				A2(

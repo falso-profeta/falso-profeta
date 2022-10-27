@@ -134,10 +134,8 @@ viewShowMore st =
             [ text ("- " ++ st.context)
             ]
         , div []
-            [ Ui.icon "fab fa-youtube"
-            , text " "
-            , a [ href "#", onClick ToggleVideo ]
-                [ text "veja o vídeo" ]
+            [ a [ href "#", onClick ToggleVideo ]
+                [ Ui.icon "fab black fa-youtube", text " veja o vídeo" ]
             ]
         , div [ class "ContentBox-controls" ]
                 [ Ui.fab (fade Prev FromRight) "fas fa-chevron-left"

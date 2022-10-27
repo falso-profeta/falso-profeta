@@ -11,8 +11,12 @@ def build(ctx):
 
 
 @task
-def start(ctx):
-    ctx.run("elm-live src/Main.elm -Hv -s main.html")
+def start(ctx, hot=False):
+    flags = []
+    if hot:
+        flags.append('-H')
+    flags = ' '.join(flags)
+    ctx.run(f"elm-live src/Main.elm {flags} -v")
 
 
 @task(build)
@@ -28,3 +32,7 @@ def publish(ctx, message="Update site"):
     ctx.run(f'git commit -m "{message}"')
     ctx.run('git push')
 
+
+@task(build)
+def check(ctx):
+    ctx.run('python data/check_links.py')

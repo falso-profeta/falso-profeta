@@ -7443,6 +7443,10 @@ var $author$project$Ui$youtubeIframe = F2(
 					$elm$html$Html$Attributes$src(normalizedUrl),
 					A2(
 					$elm$html$Html$Attributes$property,
+					'title',
+					$elm$json$Json$Encode$string('Youtube')),
+					A2(
+					$elm$html$Html$Attributes$property,
 					'frameborder',
 					$elm$json$Json$Encode$string('0')),
 					A2(
@@ -7452,7 +7456,7 @@ var $author$project$Ui$youtubeIframe = F2(
 					A2(
 					$elm$html$Html$Attributes$property,
 					'allow',
-					$elm$json$Json$Encode$string('autoplay; encrypted-media')),
+					$elm$json$Json$Encode$string('accelerometer; autoplay; encrypted-media; clipboard-write; gyroscope; picture-in-picture')),
 					A2($elm$html$Html$Attributes$attribute, 'allowfullscreen', 'true')
 				]),
 			_List_Nil);

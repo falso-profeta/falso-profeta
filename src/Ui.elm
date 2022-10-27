@@ -94,9 +94,10 @@ youtubeIframe cls url =
             , attribute "max-width" "100%"
             , class cls
             , src normalizedUrl
+            , property "title" (Json.Encode.string "Youtube")
             , property "frameborder" (Json.Encode.string "0")
             , property "allowfullscreen" (Json.Encode.string "true")
-            , property "allow" (Json.Encode.string "autoplay; encrypted-media")
+            , property "allow" (Json.Encode.string "accelerometer; autoplay; encrypted-media; clipboard-write; gyroscope; picture-in-picture")
             , attribute "allowfullscreen" "true"
             ]
             []

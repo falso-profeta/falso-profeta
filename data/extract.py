@@ -69,7 +69,7 @@ def parse_text(st: str) -> dict:
 
     # Metadata
     meta = safe_load("\n".join(paragraphs.popleft()))
-    data["youtube"] = (meta["video"] or "").replace('watch?v=', 'embed/') 
+    data["youtube"] = normalize_youtube_embed(meta["video"] or "").replace('watch?v=', 'embed/') 
 
     # Rants
     data["rants"] = rants = []
@@ -114,6 +114,30 @@ def parse_source(source: str):
         print(f"WARNING: unknown source: {domain}", file=sys.stderr)
         name = domain
     return {"name": name, "url": source}
+
+
+def normalize_youtube_embed(link: str) -> str:
+    link, sep, opts = link.partition('?')
+    if sep:
+        suffix = ''
+        parts = opts.partition('&')
+        for i, part in enumerate(parts):
+            if part.startswith('v='):
+                part = part.removeprefix('v=')
+                link = link.removesuffix('watch') + f'embed/{part}'
+            elif part.startswith('time_continue='):
+                part = part.removeprefix('time_continue=')
+                suffix = f'&start={part}'
+            else:
+                suffix += '&' + part
+        suffix = suffix.strip('& ')
+        if suffix:
+            link += '?' + suffix 
+        link = link
+    else:
+        ...
+    print(link, file=sys.stderr)
+    return link
 
 
 def main():

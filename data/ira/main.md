@@ -1,7 +1,7 @@
 # Vamos fuzilar a petralhada (Jair Bolsonaro, em comício no Acre)
 
     pecado: ira
-    video: https://www.youtube.com/watch?time_continue=53&v=FYErb6oriiU
+    video: https://www.youtube.com/embed/FYErb6oriiU?start=19
     outras:
         - Quanto mais se matar, melhor <https://www.youtube.com/watch?v=Ii-Bo9HPAeE>
         - Violência se combate com violência <https://www.youtube.com/watch?v=o8ECr0eDEGo>

@@ -7,6 +7,7 @@
 	<meta property="og:url" content="http://falso-profeta.com/">
 	<meta property="og:image" content="./static/capa.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +33,7 @@
 			}
 		})();
 	</script>
-	<script type="text/javascript" src="./static/app.min.js"></script>
+	<script type="text/javascript" src="./static/main.js"></script>
 </head>
 
 <body>
@@ -42,11 +43,8 @@
 
 <!-- Removes splash and starts elm app. -->
 <script type="text/javascript">
-	Elm.App.init({ node: document.getElementById("app") });
-	if (window.location.hostname === "localhost") {
-		document.designMode = "on";
-	}
-	else if (window.location.hostname === "falso-profeta.github.io") {
+	Elm.Main.init({ node: document.getElementById("app") });
+	if (window.location.hostname === "falso-profeta.github.io") {
 		window.location.href = 'http://falso-profeta.com';
 	}
 </script>
@@ -58,5 +56,6 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'UA-128067823-1');
+  gtag('config', 'G-339324661');
 </script>
 </html>

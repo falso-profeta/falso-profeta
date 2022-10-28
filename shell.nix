@@ -3,6 +3,8 @@ let
   tools = with pkgs; [
     sassc
     jq
+    nodePackages.uglify-js
+    nodePackages.clean-css-cli
   ];
   elmInputs = with pkgs.elmPackages; [
     elm

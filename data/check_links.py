@@ -7,7 +7,7 @@ import asyncio
 import aiohttp
 
 from time import perf_counter
-from typing import Dict, Sequence, Tuple
+from typing import Dict, Tuple
 from pathlib import Path
 
 sys.path.append(Path(__file__).parent)

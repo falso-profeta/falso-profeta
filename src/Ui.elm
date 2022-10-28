@@ -10,6 +10,7 @@ import Json.Encode
 import Types exposing (..)
 
 
+
 --- LAYOUT ELEMENTS ------------------------------------------------------------
 
 
@@ -40,8 +41,6 @@ emptyNav =
 
 asUrl st =
     "url(\"" ++ st ++ "\")"
-
-
 
 
 

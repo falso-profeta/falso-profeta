@@ -17,6 +17,7 @@ type StoryState
     | ShowVideo
     | ShowEvents
 
+
 view : Model -> Html.Html Msg
 view m =
     let
@@ -46,5 +47,3 @@ view m =
                     "ResetAnimation"
     in
     div [ class revealClass ] content
-
-

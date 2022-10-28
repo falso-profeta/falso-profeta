@@ -12,8 +12,8 @@ import Model
         , readStory
         )
 import Process
-import Task
 import Tape exposing (..)
+import Task
 
 
 type Msg
@@ -40,8 +40,6 @@ update msg m =
 
         _ ->
             ( m, Cmd.none )
-
-
 
 
 toggleState : AppState -> AppState -> Model -> Model

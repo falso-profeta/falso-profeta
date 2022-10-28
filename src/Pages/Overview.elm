@@ -1,23 +1,25 @@
-module Pages.Overview exposing (Model, Msg(..), view, init, update)
+module Pages.Overview exposing (Model, Msg(..), init, update, view)
 
 import Browser.Navigation exposing (Key, pushUrl)
+import Config as Cfg
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Process
 import Task
-import Ui
 import Types exposing (Quote(..))
-import Config as Cfg
+import Ui
+
 
 type alias Model =
     { state : State
     , cfg : Cfg.Model
     }
 
+
 type State
     = ViewLinks
-    | ViewOverview 
+    | ViewOverview
 
 
 type Msg
@@ -26,7 +28,8 @@ type Msg
 
 
 init : Cfg.Model -> Model
-init cfg = Model ViewOverview cfg 
+init cfg =
+    Model ViewOverview cfg
 
 
 toggle m =
@@ -36,6 +39,7 @@ toggle m =
 
         ViewOverview ->
             { m | state = ViewLinks }
+
 
 view : Model -> Html Msg
 view m =
@@ -50,7 +54,7 @@ view m =
                 ViewLinks ->
                     viewLinks
 
-                ViewOverview  ->
+                ViewOverview ->
                     viewOverview
     in
     Ui.appShell "./static/facepalm.jpg" Ui.emptyNav quote content

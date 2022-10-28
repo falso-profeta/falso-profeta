@@ -4,18 +4,18 @@ import sys
 
 PATH = Path(__file__).parent
 FILES = [
-    'ira',
-    'avareza',
-    'luxuria',
-    'gula',
-    'economia',
-    'racismo',
-    'intolerancia',
+    "ira",
+    "avareza",
+    "luxuria",
+    "gula",
+    "economia",
+    "racismo",
+    "intolerancia",
     # 'preguica',
-    'imigrantes',
-    'lgbt',
-    'ditadura',
-    'presos',
+    "imigrantes",
+    "lgbt",
+    "ditadura",
+    "presos",
 ]
 SOURCES = {
     "youtube.com": "Youtube",

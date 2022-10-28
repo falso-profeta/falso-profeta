@@ -13,9 +13,10 @@ module Model exposing
     , readStory
     )
 
-import Tape exposing (..)
 import FinishPage
+import Tape exposing (..)
 import Types exposing (..)
+
 
 
 --- MODEL ----------------------------------------------------------------------
@@ -45,4 +46,3 @@ modelDecoder =
     in
     D.list storyDecoder
         |> D.andThen toModel
-

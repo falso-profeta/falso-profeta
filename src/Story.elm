@@ -1,9 +1,11 @@
-module Story exposing (..) 
+module Story exposing (..)
 
 import Json.Decode as D
 import Json.Decode.Pipeline exposing (hardcoded, required)
 
-type alias Url = String
+
+type alias Url =
+    String
 
 
 type alias Story =
@@ -39,7 +41,9 @@ type alias Source =
     }
 
 
+
 --- JSON Decoders -------------------------------------------------------------
+
 
 storyDecoder : D.Decoder Story
 storyDecoder =
@@ -53,6 +57,7 @@ storyDecoder =
         |> required "image" D.string
         |> required "events" (D.list eventDecoder)
         |> required "rants" (D.list rantDecoder)
+
 
 eventDecoder : D.Decoder Event
 eventDecoder =
@@ -68,6 +73,7 @@ rantDecoder =
     D.map2 Rant
         (D.field "text" D.string)
         (D.field "source" (D.maybe sourceDecoder))
+
 
 sourceDecoder : D.Decoder Source
 sourceDecoder =

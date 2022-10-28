@@ -25,13 +25,13 @@ def clean_ws(xs: deque[str]) -> deque[str]:
 
 
 def update_sw(files):
-    lines = (f'    {{ url: {file}, revision: null }}, ' for file in files)
-    src = '\n'.join(lines)
-    
-    with open(PATH.parent / 'sw-template.js') as fd:
-        src = fd.read().replace('$URLS', src)
-    
-    with open(PATH.parent / 'sw.js', 'w') as fd:
+    lines = (f"    {{ url: {file}, revision: null }}, " for file in files)
+    src = "\n".join(lines)
+
+    with open(PATH.parent / "sw-template.js") as fd:
+        src = fd.read().replace("$URLS", src)
+
+    with open(PATH.parent / "sw.js", "w") as fd:
         fd.write(src)
 
 
@@ -69,7 +69,9 @@ def parse_text(st: str) -> dict:
 
     # Metadata
     meta = safe_load("\n".join(paragraphs.popleft()))
-    data["youtube"] = normalize_youtube_embed(meta["video"] or "").replace('watch?v=', 'embed/') 
+    data["youtube"] = normalize_youtube_embed(meta["video"] or "").replace(
+        "watch?v=", "embed/"
+    )
 
     # Rants
     data["rants"] = rants = []
@@ -117,22 +119,22 @@ def parse_source(source: str):
 
 
 def normalize_youtube_embed(link: str) -> str:
-    link, sep, opts = link.partition('?')
+    link, sep, opts = link.partition("?")
     if sep:
-        suffix = ''
-        parts = opts.partition('&')
+        suffix = ""
+        parts = opts.partition("&")
         for i, part in enumerate(parts):
-            if part.startswith('v='):
-                part = part.removeprefix('v=')
-                link = link.removesuffix('watch') + f'embed/{part}'
-            elif part.startswith('time_continue='):
-                part = part.removeprefix('time_continue=')
-                suffix = f'&start={part}'
+            if part.startswith("v="):
+                part = part.removeprefix("v=")
+                link = link.removesuffix("watch") + f"embed/{part}"
+            elif part.startswith("time_continue="):
+                part = part.removeprefix("time_continue=")
+                suffix = f"&start={part}"
             else:
-                suffix += '&' + part
-        suffix = suffix.strip('& ')
+                suffix += "&" + part
+        suffix = suffix.strip("& ")
         if suffix:
-            link += '?' + suffix 
+            link += "?" + suffix
         link = link
     else:
         ...
@@ -149,10 +151,10 @@ def main():
             src = fd.read()
             try:
                 data = parse_text(src)
-                data['name'] = path
+                data["name"] = path
                 data["image"] = f"/static/bg-{path}.jpg"
             except Exception as exc:
-                print(f'\nerror({path}): {exc}\n\n', file=sys.stderr)
+                print(f"\nerror({path}): {exc}\n\n", file=sys.stderr)
                 raise
             else:
                 result.append(data)

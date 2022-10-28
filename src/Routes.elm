@@ -11,14 +11,13 @@ type Route
     | ViewStory String
     | Overview
 
-    
 
 matchers : Parser (Route -> a) a
 matchers =
     Parser.oneOf
         [ Parser.map Intro Parser.top
         , Parser.map Overview (Parser.s "final")
-        , Parser.map ViewStory (Parser.string)
+        , Parser.map ViewStory Parser.string
         ]
 
 

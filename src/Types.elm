@@ -1,9 +1,10 @@
-module Types exposing (Url, Quote(..), Transition(..), viewQuote, transitionDuration)
+module Types exposing (Quote(..), Transition(..), Url, transitionDuration, viewQuote)
 
 import Html exposing (..)
 import Html.Attributes as Attr exposing (..)
 import Html.Events exposing (..)
-import String 
+import String
+
 
 type alias Url =
     String
@@ -22,15 +23,15 @@ type Transition
 
 
 viewQuote : Quote -> Html msg
-viewQuote (Quote st from) = 
-    let 
+viewQuote (Quote st from) =
+    let
         clean =
             String.join " " <| String.words st
 
         n =
             String.length clean
-    
-        attrs = 
+
+        attrs =
             if n > 200 then
                 [ style "font-size" "0.85em" ]
 
@@ -41,14 +42,12 @@ viewQuote (Quote st from) =
                 [ style "font-size" "1.05em" ]
 
             else
-                []     
-    
-    in 
+                []
+    in
     div [ class "Quote" ]
-        [ blockquote (attrs) [ span [] [ text st ] ]
+        [ blockquote attrs [ span [] [ text st ] ]
         , Html.cite [] [ text from ]
         ]
-
 
 
 transitionDuration : Transition -> Float

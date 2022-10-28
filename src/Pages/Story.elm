@@ -1,19 +1,20 @@
-module Pages.Story exposing (Model, Msg, view, update, init)
+module Pages.Story exposing (Model, Msg, init, update, view)
 
+import Array exposing (Array)
+import Config as Cfg
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events as Ev
 import Html.Lazy exposing (lazy)
-import Ui
-import Config as Cfg 
-import Story exposing (Story, Source, Event, Rant)
-import Types exposing (Quote(..), Transition(..), transitionDuration)
 import Process
+import Story exposing (Event, Rant, Source, Story)
 import Task
-import Array exposing (Array)
-import Dict exposing (Dict)
+import Types exposing (Quote(..), Transition(..), transitionDuration)
+import Ui
 
-type State 
+
+type State
     = Init
     | Expanded
     | Events
@@ -31,45 +32,56 @@ type Msg
 
 
 type alias Model =
-    { story: Story
-    , state: State
-    , transition: Transition
-    , cfg: Cfg.Model
+    { story : Story
+    , state : State
+    , transition : Transition
+    , cfg : Cfg.Model
     }
 
 
 init : Story -> Cfg.Model -> Model
-init st cfg = { story = st, cfg = cfg, state = Init, transition = NoTransition }
+init st cfg =
+    { story = st, cfg = cfg, state = Init, transition = NoTransition }
 
 
 toggleEvents : State -> Msg
 toggleEvents st =
     case st of
-        Events -> ToState Expanded
-        _ -> ToState Events
+        Events ->
+            ToState Expanded
+
+        _ ->
+            ToState Events
 
 
 toggleExpanded : State -> Msg
 toggleExpanded st =
     case st of
-        Expanded -> ToState Init
-        _ -> ToState Expanded
-    
+        Expanded ->
+            ToState Init
+
+        _ ->
+            ToState Expanded
+
+
 toggleVideo : State -> Msg
 toggleVideo st =
     case st of
-        Video -> ToState  Init
-        _ -> ToState  Video
+        Video ->
+            ToState Init
+
+        _ ->
+            ToState Video
 
 
-update : Msg -> Model -> (Model, Cmd Msg) 
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg m =
-    case msg of 
+    case msg of
         ToState st ->
-            ( {m | state = st}, Cmd.none)
-        
-        OnResetTransition -> 
-            ( { m | transition = Reset}, Cmd.none )
+            ( { m | state = st }, Cmd.none )
+
+        OnResetTransition ->
+            ( { m | transition = Reset }, Cmd.none )
 
         OnPreTransition step nextMsg ->
             ( { m | transition = step }, Task.perform (\_ -> nextMsg) (Process.sleep (transitionDuration step)) )
@@ -82,20 +94,22 @@ update msg m =
                 task =
                     Task.perform (\_ -> OnResetTransition) (Process.sleep (transitionDuration step))
             in
-            ( { new | transition = step }, Cmd.batch [task, cmd] )
+            ( { new | transition = step }, Cmd.batch [ task, cmd ] )
 
-        OnNextStory -> 
-            let 
-                url = Cfg.getNextStory m.story.name m.cfg |> Maybe.withDefault "final"
+        OnNextStory ->
+            let
+                url =
+                    Cfg.getNextStory m.story.name m.cfg |> Maybe.withDefault "final"
             in
             ( m, Cfg.pushUrl url m.cfg )
 
         OnPrevStory ->
-            let 
-                url = Cfg.getPrevStory m.story.name m.cfg |> Maybe.withDefault ""
+            let
+                url =
+                    Cfg.getPrevStory m.story.name m.cfg |> Maybe.withDefault ""
             in
             ( m, Cfg.pushUrl url m.cfg )
-        
+
         OnResetStory ->
             ( m, Cfg.pushUrl "" m.cfg )
 
@@ -108,10 +122,17 @@ view m =
 
         content =
             case m.state of
-                Init -> viewExpandedOrInit False m
-                Expanded -> viewExpandedOrInit True m
-                Events -> viewEvents m
-                Video -> viewVideo m
+                Init ->
+                    viewExpandedOrInit False m
+
+                Expanded ->
+                    viewExpandedOrInit True m
+
+                Events ->
+                    viewEvents m
+
+                Video ->
+                    viewVideo m
     in
     Ui.appShell ("." ++ m.story.image) (Ui.navLinks OnResetStory) quote content
 
@@ -119,13 +140,15 @@ view m =
 viewExpandedOrInit : Bool -> Model -> Html Msg
 viewExpandedOrInit expand m =
     let
-        st = m.story
-        
-        (parentClass, fabMiddle) =
+        st =
+            m.story
+
+        ( parentClass, fabMiddle ) =
             if expand then
-                 ("ContentBox ContentBox--rants", Ui.fab (toggleExpanded m.state) "fas fa-minus")
+                ( "ContentBox ContentBox--rants", Ui.fab (toggleExpanded m.state) "fas fa-minus" )
+
             else
-                 ("ContentBox", Ui.fabText (toggleExpanded m.state) "saiba mais")
+                ( "ContentBox", Ui.fabText (toggleExpanded m.state) "saiba mais" )
 
         backCover =
             a [ Ev.onClick (toggleExpanded m.state), href "#" ]
@@ -145,14 +168,13 @@ viewExpandedOrInit expand m =
                     , i [ class "fas fa-chevron-right" ] []
                     ]
                 ]
-
     in
     div [ class parentClass ]
         [ div [] [ q [] [ text st.utter ] ]
         , Html.cite [ style "color" "#000b" ]
             [ text ("- " ++ st.context)
             ]
-        , div [ style "margin-bottom" "1em"]
+        , div [ style "margin-bottom" "1em" ]
             [ a [ href "#", Ev.onClick (toggleVideo m.state) ]
                 [ Ui.icon "fab black fa-youtube", text " veja o vídeo" ]
             ]
@@ -204,7 +226,6 @@ viewEvent { title, text, source, image } =
         ]
 
 
-
 viewVideo : Model -> Html Msg
 viewVideo m =
     div [ class "Video" ]
@@ -239,7 +260,6 @@ viewRant rant =
         (q [] [ text rant.text ] :: links)
 
 
-
 viewSource : Source -> Html msg
 viewSource { name, url } =
     Html.cite [] [ text "Fonte: ", a [ href url ] [ text name ] ]
@@ -257,6 +277,7 @@ last lst =
         x :: tail ->
             last tail
 
-fadeAndThen : Transition -> Msg -> Msg 
+
+fadeAndThen : Transition -> Msg -> Msg
 fadeAndThen trans msg =
     OnPreTransition FadeOut (OnPostTransition trans msg)

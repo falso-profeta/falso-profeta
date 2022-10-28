@@ -33,8 +33,8 @@ com isso”, conta ela.
 
 ## Travesti é espancada após se posicionar contra Bolsonaro
 
-    url: http://www.portaldiariodonorte.com.br/travesti-e-espancado-no-piaui-apos-se-posicionar-contra-bolsonaro/
-    imagem: http://www.portaldiariodonorte.com.br/wp-content/uploads/2018/09/ac38426d-e8d6-41b2-848d-e9bfbbf1f10f.jpg
+    url: https://www.piripiri40graus.com/portal/index.php/noticias/22-noticias-variadas/4275-travesti-e-brutalmente-espancada-apos-se-posicionar-contra-jair-bolsonaro-no-norte-do-pi
+    imagem: https://www.piripiri40graus.com/portal/images/20431546-330622694032235-2119565193801309801-n.jpg
 
 A travesti Netinha Matias, de 40 anos, foi brutalmente espancada por dois
 apoiadores de Bolsonaro, dentro de sua residência na cidade de Sigefredo Pacheco,

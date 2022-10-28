@@ -4,7 +4,7 @@
     video: https://www.youtube.com/watch?time_continue=54&v=QKwJHn25gRo
     outras:
         - Nem pra procriadores [os quilombolas] servem mais <https://www.youtube.com/watch?v=yabLVrYCvdo>
-        - Eu não empregaria [mulheres e homens] com o mesmo salário <https://www.huffpostbrasil.com/2018/08/18/bolsonaro-afirmou-sim-que-nao-empregaria-mulher-com-mesmo-salario-de-homem_a_23504540/>
+        - Eu não empregaria [mulheres e homens] com o mesmo salário <https://www.youtube.com/watch?v=lZZisKgrtWY>
         - Se não se cuidou, o problema é dele (sobre portadores do vírus HIV) <https://www.youtube.com/watch?v=ff80YSpuAsE>
 
 
@@ -32,9 +32,9 @@ teria dito: "Então pronto, eu vou rasgar sua receita", rasgou e saiu, informou
 o SindSaúde-RN em comunicado.
 
 
-## Jornalista é agredida e ameaçada de estupro em Recife (PE)
+## Jornalista é ameaçada de morte e estupro (Rede de proteção)
 
-    url: https://www.op9.com.br/pe/noticias/jornalista-e-agredida-e-ameacada-de-estupro-ao-sair-de-zona-eleitoral/
-    imagem: http://www.diarioonline.com.br/app/painel/modulo-noticia/img/imagensdb/original/destaque-547037-jornalista-agredida.jpg
-
-Uma jornalista foi agredida e ameaçada de estupro ao sair de uma zona eleitoral em Recife-PE. A mulher foi atacada por dois homens,um deles vetindo uma camiseta com a foto de Bolsonaro. Segundo a vítima, os agressores disseram que “quando o comandante ganhasse, a imprensa toda ia morrer”.
+    url: https://rededeprotecao.org.br/jornalista-e-ameacada-de-morte-e-estupro/
+    imagem: https://rededeprotecao.org.br/wp-content/uploads/2022/09/640px-BFM_TV_journalist_after_Macron_speech_in_Tokyo_01.jpg
+    
+Os ataques aconteceram depois que ela comentou sobre o comportamento de Bolsonaro no 7 de setembro

@@ -8,14 +8,15 @@ A pessoa boa tira o bem do seu depósito de coisas boas, e a pessoa má tira o m
 - Mateus 12:35
 
 
-## Jovens intimidam grupo pró-Haddad no metrô em São Paulo aos gritos de "Ô bicharada toma cuidado, o Bolsonaro vai matar viado"
+## Violência política pró-Bolsonaro cresce após primeiro turno
 
-    url: https://www.youtube.com/watch?v=eDlNP8bTfmE
-    imagem: https://www.revistaforum.com.br/wp-content/uploads/2018/10/palmeirenses.jpg
+    url: https://www.cartacapital.com.br/politica/episodios-de-violencia-por-motivacoes-politicas-crescem-pos-primeiro-turno/
+    imagem: https://www.cartacapital.com.br/wp-content/uploads/2018/10/copia-de-img_5877-2.jpg
 
-No domingo 30, na estação Sé do Metrô, em São Paulo, um grupo de pessoas, com
-maioria de homens vestidos com uniformes do Palmeiras foram flagrados cantando:
-“Ô bicharada toma cuidado, o Bolsonaro vai matar viado”.
+
+Um mapeamento feito em 2018 pelo pesquisador e jornalista, Haroldo Ceravolo, 
+mostra mais de 50 casos de violência cometidos desde o início de outubro por 
+defensores do candidato à presidência Jair Bolsonaro (PSL). O número aumenta a cada dia.
 
 
 ## 12h depois do primeiro turno, começam a aparecer pixações de cunho racista, machista e homofóbico em instituições de ensino

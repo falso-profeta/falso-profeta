@@ -136,9 +136,6 @@ def normalize_youtube_embed(link: str) -> str:
         if suffix:
             link += "?" + suffix
         link = link
-    else:
-        ...
-    print(link, file=sys.stderr)
     return link
 
 

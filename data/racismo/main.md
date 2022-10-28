@@ -10,18 +10,19 @@ Ninhada de cobras venenosas! Como é que vocês podem dizer coisas boas se são 
 - Mateus 12:34
 
 
-## Gays, negros e indígenas já sentem nas ruas o medo de um governo Bolsonaro
-
-    url: https://brasil.elpais.com/brasil/2018/10/18/politica/1539891924_366363.html
-    imagem: http://to-do/
-
-Episódios de intimidação aumentam ansiedade entre grupos que se sentem vulneráveis
-por discursos feitos no passado, e hoje negados, pelo candidato.
-
-
 ## Por política, criança negra é ameaçada em escola
 
     url: http://www.diariodepernambuco.com.br/app/noticia/politica/2018/10/20/interna_politica,766006/por-politica-crianca-negra-e-ameacada-em-escola.shtml
     imagem: http://imgsapp.diariodepernambuco.com.br/app/noticia_127983242361/2018/10/20/766006/20181020123108507954e.jpg
 
 Após a divulgação do resultado do primeiro turno, um menino disse: “Ayanna, aqui não é lugar para você. Você não vai poder estudar mais nesta escola porque não combina com sua cor. Sua família é negra e vocês têm que viver separados de nós. Bolsonaro já ganhou e garantiu que vai resolver essa mistura. Se seus pais vierem falar merda, a gente mete bala”.
+
+
+## Fala racista de Bolsonaro no podcast Flow causa revolta nas redes 
+
+    url: https://veja.abril.com.br/coluna/virou-viral/racismo-de-bolsonaro-causa-revolta-nas-redes-veja-video/
+    imagem: https://veja.abril.com.br/wp-content/uploads/2022/08/f14c4c15-e225-4ce2-953a-88d136923138.jpg
+
+Bolsonaro se defende das acusações de racismo falando que se fosse racista, teria 
+deixado um homem negro morrer afogado. O apresentador do programa rebateu: “Só o 
+jeito que o senhor contou essa historia ja é motivo para te chamar de racista”.

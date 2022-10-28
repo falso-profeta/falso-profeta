@@ -18,7 +18,12 @@ FILES = [
     "presos",
 ]
 SOURCES = {
+    "youtu.be": "Youtube",
+    "catracalivre.com.br": "Catraca livre",
     "youtube.com": "Youtube",
+    "em.com.br": "Estado de Minas",
+    "ponte.org": "Ponte",
+    "poder360.com.br": "Poder 360",
     "folha.uol.com.br": "Folha de São Paulo",
     "www1.folha.uol.com.br": "Folha de São Paulo",
     "acervo.folha.com.br": "Folha de São Paulo",

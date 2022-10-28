@@ -13,7 +13,7 @@
 ## Bolsonaro vota a favor do aumento do próprio salário
 
     url: https://congressoemfoco.uol.com.br/especial/noticias/quem-apoiou-a-votacao-do-aumento-para-os-parlamentares/
-    imagem: https://www.redebrasilatual.com.br/politica/2018/09/bolsonaro-votou-a-favor-de-privilegios-aumento-de-gastos-e-contra-privatizacoes/bolsonaro/image_preview
+    imagem: https://www.redebrasilatual.com.br/wp-content/uploads/2019/05/bolsonaro-26.jpg
 
 Em dezembro de 2010, Bolsonaro e outros deputados federais apoiaram a requisição de urgência para o projeto de aumento do próprio salário (e também o de senadores, ministros de Estado,  vice-presidente e presidente). O salário foi aumentado para $26,7 mil. Apenas 35 deputados votaram contra.
 
@@ -28,8 +28,8 @@ Em dezembro de 2010, Bolsonaro e outros deputados federais apoiaram a requisiç�
 
 ## Site do TSE mostra que Bolsonaro recebeu $200 mil da JBS
 
-    url: https://www.metropoles.com/brasil/politica-br/site-do-tse-mostra-que-bolsonaro-recebeu-doacao-da-jbs
-    imagem: /static/no-foto.png
+    url: https://www.metropoles.com/brasil/politica-brasil/site-do-tse-mostra-que-bolsonaro-recebeu-doacao-da-jbs
+    imagem: https://uploads.metropoles.com/wp-content/uploads/2016/05/06173832/170416DF-impeachment-camara-058.jpg
 
 O nome do deputado federal Jair Bolsonaro (PP) aparece no site do Tribunal Superior Eleitoral (TSE),
 em “Consulta aos Doadores e Fornecedores de Campanha de Candidatos”. Ali, consta que ele recebeu o valor

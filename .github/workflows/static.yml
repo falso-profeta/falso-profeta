@@ -1,42 +1,58 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Compila o site (Elm + SCSS) e publica no GitHub Pages.
+# Os dados (static/data.json) e as imagens ficam versionados, porque os
+# markdowns em data/*/main.md não entram no repositório (ver .gitignore).
+name: Deploy to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/cache@v4
+        with:
+          path: ~/.elm
+          key: elm-${{ hashFiles('elm.json') }}
+      - name: Instala Elm e Sass
+        run: npm install --no-save --no-audit --no-fund elm@0.19.1-6 sass
+      - name: Compila Elm e SCSS
+        run: |
+          mkdir -p dist
+          cp -r static dist/static
+          rm -f dist/static/app.js
+          npx elm make src/Main.elm --optimize --output=dist/static/main.js
+          npx sass --no-source-map --style=compressed scss/main.scss dist/static/main.css
+      - name: Monta o site
+        run: |
+          cp main.html dist/index.html
+          # Revisão nova a cada deploy: o service worker não prende imagens antigas.
+          sed "s/revision: null/revision: \"${GITHUB_SHA}\"/" sw.js > dist/sw.js
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - id: deployment
+        uses: actions/deploy-pages@v4

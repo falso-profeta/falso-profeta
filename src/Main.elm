@@ -108,7 +108,17 @@ update msg m =
             ( m, Cfg.pushUrl st m.cfg )
 
         ( OnUrlRequest (Browser.Internal url), _ ) ->
-            update (OnPushUrl (Url.toString url)) m
+            -- Links `href "#"` só disparam mensagens e não mudam de rota.
+            case url.fragment of
+                Just route ->
+                    if route == "" then
+                        ( m, Cmd.none )
+
+                    else
+                        update (OnPushUrl route) m
+
+                Nothing ->
+                    ( m, Cmd.none )
 
         ( OnUrlRequest (Browser.External url), _ ) ->
             ( m, Nav.load url )

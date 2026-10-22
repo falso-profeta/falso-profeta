@@ -3,6 +3,7 @@ module Config exposing (..)
 import Array exposing (Array)
 import Browser.Navigation as Nav exposing (Key)
 import Dict exposing (Dict)
+import Routes
 import Story exposing (Story)
 
 
@@ -40,7 +41,7 @@ setStories sts m =
 
 pushUrl : String -> Model -> Cmd msg
 pushUrl url m =
-    Nav.pushUrl m.navKey url
+    Nav.pushUrl m.navKey ("#/" ++ Routes.trimRoute url)
 
 
 storyDbFromList : List Story -> Dict String StoryDbEntry

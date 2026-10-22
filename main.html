@@ -18,7 +18,7 @@
 			if ("serviceWorker" in navigator) {
 				try {
 				const registration = await navigator.serviceWorker.register("./sw.js", {
-					scope: "/",
+					scope: "./",
 				});
 				if (registration.installing) {
 					console.log("Service worker installing");
@@ -44,9 +44,6 @@
 <!-- Removes splash and starts elm app. -->
 <script type="text/javascript">
 	Elm.Main.init({ node: document.getElementById("app") });
-	if (window.location.hostname === "falso-profeta.github.io") {
-		window.location.href = 'http://falso-profeta.com';
-	}
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
